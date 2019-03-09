@@ -1,0 +1,18 @@
+buildscript {
+    repositories {
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/libs-milestone' }
+    }
+
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.2.0.BUILD-SNAPSHOT'
+    }
+}
+
+subprojects {
+	apply plugin: 'java'
+
+	group = 'framework.templates'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '1.8'
+}
