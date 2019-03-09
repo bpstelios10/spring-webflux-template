@@ -1,4 +1,4 @@
-package framework.templates.springbootwebflux;
+package framework.templates.springbootwebflux.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,2 +1,3 @@
 rootProject.name = 'spring-boot-webflux'
-include 'service'
+include 'service', 'service-functional'
+

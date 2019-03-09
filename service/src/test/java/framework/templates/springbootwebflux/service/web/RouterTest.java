@@ -1,4 +1,4 @@
-package framework.templates.springbootwebflux.web;
+package framework.templates.springbootwebflux.service.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +24,6 @@ public class RouterTest {
                 .accept(MediaType.TEXT_PLAIN)
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody().isEmpty();
+                .expectBody().returnResult().getResponseBody().equals(new Byte[]{'O', 'K'});
     }
 }

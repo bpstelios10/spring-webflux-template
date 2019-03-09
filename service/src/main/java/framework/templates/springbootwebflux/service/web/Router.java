@@ -1,4 +1,4 @@
-package framework.templates.springbootwebflux.web;
+package framework.templates.springbootwebflux.service.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
