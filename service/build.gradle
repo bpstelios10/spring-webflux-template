@@ -12,9 +12,14 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'
-    compile group: 'com.fasterxml.jackson', name: 'jackson-bom', version: '2.9.8', ext: 'pom'
+    compile group: 'com.fasterxml.jackson', name: 'jackson-bom', version: '2.9.8'
 }
 
 jar {
     enabled = true
+}
+
+bootJar {
+    baseName = 'service'
+    version = ''
 }
