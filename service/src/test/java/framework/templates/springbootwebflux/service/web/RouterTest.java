@@ -20,10 +20,10 @@ public class RouterTest {
     @Test
     public void route() {
         webTestClient
-                .get().uri("/status")
+                .get().uri("/private/status")
                 .accept(MediaType.TEXT_PLAIN)
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody().returnResult().getResponseBody().equals(new Byte[]{'O', 'K'});
+                .expectBody(String.class).isEqualTo("OK");
     }
 }

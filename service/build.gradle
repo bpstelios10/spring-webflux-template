@@ -10,9 +10,18 @@ repositories {
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}"
+    compile("org.springframework.boot:spring-boot-starter-actuator:${versions.springBoot}") {
+        exclude group: 'io.micrometer', module: 'micrometer-core'
+    }
+    compile 'io.micrometer:micrometer-registry-prometheus:1.0.7'
+    compile 'com.fasterxml.jackson:jackson-bom:2.9.8'
+    compile 'com.google.guava:guava:27.1-jre'
+    compile 'io.prometheus:simpleclient_hotspot:0.6.0'
+
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'
-    compile group: 'com.fasterxml.jackson', name: 'jackson-bom', version: '2.9.8'
+    testCompile "org.mockito:mockito-core:3.2.0"
+    testCompile "net.bytebuddy:byte-buddy:1.10.6" //for some reason it is needed but not included in mockito-core
 }
 
 jar {

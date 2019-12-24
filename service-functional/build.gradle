@@ -1,5 +1,3 @@
-version 'unspecified'
-
 sourceCompatibility = 1.8
 
 repositories {
@@ -12,12 +10,19 @@ dependencies {
     compile group: 'io.cucumber', name: 'cucumber-jvm', version: '4.2.6'
     compile group: 'io.cucumber', name: 'cucumber-spring', version: '4.2.6'
     compile group: 'io.cucumber', name: 'cucumber-java8', version: '4.2.6'
-    
+
     compile "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     compile "org.apache.httpcomponents:httpclient:4.5.3"
     compile 'org.apache.commons:commons-collections4:4.1'
     // Fixes running tests in IntelliJ - don't set as runtime dependency, breaks remote functional tests
     compile "org.springframework:spring-tx:${versions.spring}"
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
+    testCompile(
+            "org.junit.jupiter:junit-jupiter-params:5.5.2",
+            "org.mockito:mockito-junit-jupiter:3.0.0")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+    test.useJUnitPlatform()
 }
 
 jar {
@@ -41,5 +46,6 @@ task localFunctional(type: JavaExec) {
     dependsOn = ['testClasses']
 }
 
-localFunctional.mustRunAfter ':service:test'
+localFunctional.mustRunAfter 'test'
+tasks.getByPath(':service-functional:test').mustRunAfter ':service:test'
 check.dependsOn "localFunctional"
