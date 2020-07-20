@@ -17,6 +17,7 @@ dependencies {
     compile 'com.fasterxml.jackson:jackson-bom:2.9.8'
     compile 'com.google.guava:guava:27.1-jre'
     compile 'io.prometheus:simpleclient_hotspot:0.6.0'
+    compile 'org.apache.commons:commons-lang3:3.9'
 
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'
