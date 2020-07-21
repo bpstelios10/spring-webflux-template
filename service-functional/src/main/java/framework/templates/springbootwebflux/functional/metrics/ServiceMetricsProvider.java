@@ -1,6 +1,7 @@
 package framework.templates.springbootwebflux.functional.metrics;
 
 import framework.templates.springbootwebflux.functional.client.ServiceClient;
+import framework.templates.springbootwebflux.functional.client.ServiceRequest;
 import framework.templates.springbootwebflux.functional.client.ServiceRequestGenerator;
 import framework.templates.springbootwebflux.functional.client.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,18 @@ import java.util.regex.Pattern;
 import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.springframework.http.HttpMethod.GET;
 
 @Component
 @Scope("cucumber-glue")
 public class ServiceMetricsProvider {
 
     private final ServiceClient serviceClient;
-    private final ServiceRequestGenerator requestGenerator;
+    private final ServiceRequest.ServiceRequestBuilder serviceRequestBuilder;
 
     @Autowired
     public ServiceMetricsProvider(ServiceClient serviceClient, ServiceRequestGenerator serviceRequestGenerator) {
         this.serviceClient = serviceClient;
-        this.requestGenerator = serviceRequestGenerator;
+        this.serviceRequestBuilder = serviceRequestGenerator.serviceRequestBuilder("/private/metrics");
     }
 
     public BigDecimal getCurrentMetricValue(String metricKey) {
@@ -42,7 +42,7 @@ public class ServiceMetricsProvider {
     }
 
     private String getMetrics() {
-        serviceClient.execute(requestGenerator.withMethod(GET).withPath("/private/metrics").generate());
+        serviceClient.execute(serviceRequestBuilder.build());
         ServiceResponse response = serviceClient.getResponse();
 
         assertThat(response.getStatusCode())

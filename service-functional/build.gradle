@@ -40,7 +40,7 @@ task localFunctional(type: JavaExec) {
             "--plugin", "junit:build/junit-test-report.xml",
             "--plugin", "json:build/cucumber-report.json",
             "--glue", "framework.templates.springbootwebflux.functional.steps",
-            "src/test/resources/features/"
+            "src/main/resources/features/"
     ]
     jvmArgs = ["-XX:MaxMetaspaceSize=256m", "-Xmx1024m", "-Xms1024m", "-Xss256k", "-XX:NativeMemoryTracking=summary", "-XX:+UnlockDiagnosticVMOptions", "-XX:+AlwaysPreTouch", "-XX:+HeapDumpOnOutOfMemoryError"]
     dependsOn = ['testClasses']

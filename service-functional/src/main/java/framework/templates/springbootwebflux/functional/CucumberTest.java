@@ -11,7 +11,7 @@ public class CucumberTest {
                 "--plugin", "junit:build/junit-test-report.xml",
                 "--plugin", "json:build/cucumber-report.json",
                 "--glue", "framework.templates.springbootwebflux.functional.steps",
-                "service-functional/src/test/resources/features/"
+                "service-functional/src/main/resources/features/"
         };
 
         cucumber.api.cli.Main.main(newArgs);

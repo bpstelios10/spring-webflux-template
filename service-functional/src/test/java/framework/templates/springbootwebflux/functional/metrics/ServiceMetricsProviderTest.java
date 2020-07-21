@@ -1,6 +1,7 @@
 package framework.templates.springbootwebflux.functional.metrics;
 
 import framework.templates.springbootwebflux.functional.client.ServiceClient;
+import framework.templates.springbootwebflux.functional.client.ServiceRequest;
 import framework.templates.springbootwebflux.functional.client.ServiceRequestGenerator;
 import framework.templates.springbootwebflux.functional.client.ServiceResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +12,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpMethod;
 
 import java.math.BigDecimal;
 import java.util.stream.Stream;
@@ -27,10 +27,15 @@ class ServiceMetricsProviderTest {
     private ServiceClient serviceClient;
     @Mock
     private ServiceRequestGenerator requestGenerator;
+    @Mock
+    private ServiceResponse serviceResponse;
+    @Mock
+    private ServiceRequest.ServiceRequestBuilder serviceResponseBuilder;
     private ServiceMetricsProvider serviceMetricsProvider;
 
     @BeforeEach
     void setup() {
+        when(requestGenerator.serviceRequestBuilder("/private/metrics")).thenReturn(serviceResponseBuilder);
         serviceMetricsProvider = new ServiceMetricsProvider(serviceClient, requestGenerator);
     }
 
@@ -38,10 +43,7 @@ class ServiceMetricsProviderTest {
     @MethodSource("scenarios")
     void getCurrentValue_doesNotThrowException_whenScrapingMetricsSucceeds(
             String scrapedMetrics, String testMetric, BigDecimal expectedMetricValue) {
-        when(requestGenerator.withMethod(HttpMethod.GET)).thenReturn(requestGenerator);
-        when(requestGenerator.withPath("/private/metrics")).thenReturn(requestGenerator);
         doNothing().when(serviceClient).execute(any());
-        ServiceResponse serviceResponse = mock(ServiceResponse.class);
         when(serviceResponse.getStatusCode()).thenReturn(200);
         when(serviceResponse.getBody()).thenReturn(scrapedMetrics);
         when(serviceClient.getResponse()).thenReturn(serviceResponse);
@@ -53,10 +55,7 @@ class ServiceMetricsProviderTest {
 
     @Test
     void getCurrentValue_throwsException_whenUnableToScrapeMetrics() {
-        when(requestGenerator.withMethod(HttpMethod.GET)).thenReturn(requestGenerator);
-        when(requestGenerator.withPath("/private/metrics")).thenReturn(requestGenerator);
         doNothing().when(serviceClient).execute(any());
-        ServiceResponse serviceResponse = mock(ServiceResponse.class);
         when(serviceResponse.getStatusCode()).thenReturn(500);
         when(serviceClient.getResponse()).thenReturn(serviceResponse);
 
