@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -20,6 +19,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @Slf4j
@@ -55,7 +55,11 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
     }
 
     private Mono<Void> sendResponse(ServerWebExchange exchange, HttpError responseError) {
-        exchange.getResponse().getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        if (exchange.getResponse().getHeaders().get(CONTENT_TYPE) != null) {
+            exchange.getResponse().getHeaders().set(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        } else {
+            exchange.getResponse().getHeaders().add(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        }
         return sendResponse(exchange, responseError.getStatusCode(), responseError.getHeaders(), toJson(responseError));
     }
 

@@ -2,7 +2,7 @@ package framework.templates.springbootwebflux.functional;
 
 public class CucumberTest {
 
-    public static void main(String... args) throws Throwable {
+    public static void main(String... args) {
         String[] newArgs = new String[]{
                 "--strict",
                 "--tags", "~@wip",

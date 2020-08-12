@@ -26,6 +26,7 @@ public class HttpError {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.addAll(headers);
 
-        return HttpError.of(HttpStatus.valueOf(exception.getServiceError().getStatusCode().value()), httpHeaders, exception.getServiceError().getDescription());
+        return HttpError.of(HttpStatus.valueOf(exception.getServiceError().getStatusCode().value()), httpHeaders,
+                exception.getServiceError().getDescription());
     }
 }
