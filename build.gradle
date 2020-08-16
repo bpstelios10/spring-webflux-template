@@ -23,6 +23,9 @@ subprojects {
 ext {
     versions = [
             springBoot: "2.0.6.RELEASE",
-            spring    : "5.0.7.RELEASE"
+            spring    : "5.0.7.RELEASE",
+            junit             : [
+                    jupiter: "5.5.2"
+            ]
     ]
 }

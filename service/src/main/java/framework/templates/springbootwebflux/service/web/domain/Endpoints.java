@@ -4,7 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum Endpoints {
-    PRIVATE_STATUS("/private/status");
+    PRIVATE_STATUS("/private/status"),
+    QUOTE_RANDOM("/trolltrump/quote/random"),
+    QUOTE_SEARCH("/trolltrump/quote/search");
 
     private final String path;
 

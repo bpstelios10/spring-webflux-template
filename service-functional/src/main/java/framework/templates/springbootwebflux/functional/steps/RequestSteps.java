@@ -18,19 +18,27 @@ public class RequestSteps implements En {
         Given("^the client intends to call (.*) endpoint$", (String endpoint) ->
                 requestBuilder.path(Endpoints.valueOf(endpoint).getPath())
         );
-
-        Given("^request has header with key (.*) and value (.*)$", (String headerName, String headerValue) ->
-                requestBuilder.headers(Collections.singletonMap(headerName, headerValue)));
-
+        Given("^request has header with name (.*) and value (.*)$", (String headerName, String headerValue) ->
+                requestBuilder.headers(Collections.singletonMap(headerName, headerValue))
+        );
         When("^the client makes the call$", () ->
                 client.execute(requestBuilder.build())
         );
-
         Then("^a response with code (\\d+) is returned$", (Integer responseStatus) ->
-                assertThat(client.getResponse().getStatusCode()).isEqualTo(responseStatus));
-
-        Then("^the response body is \"([^\"]*)\"$", (String expectedResponseBody) ->
-                assertThat(client.getResponse().getBody()).isEqualTo(expectedResponseBody)
+                assertThat(client.getResponse().getStatusCode()).isEqualTo(responseStatus)
+        );
+        Then("^the response body is (.*)$", (String expectedResponseBody) -> {
+                    if ("empty".equals(expectedResponseBody)) {
+                        assertThat(client.getResponse().getBody()).isEmpty();
+                    } else {
+                        assertThat(client.getResponse().getBody()).isEqualTo(expectedResponseBody);
+                    }
+                }
+        );
+        Then("^the response contains header with name (.*) and value (.*)$", (String headerName, String headerValue) ->
+                assertThat(client.getResponse().getHeaders().entrySet().stream().anyMatch(
+                        entry -> entry.getKey().equals(headerName) && entry.getValue().equals(headerValue))
+                ).isTrue()
         );
     }
 }

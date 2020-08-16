@@ -22,7 +22,11 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'
     testCompile "org.mockito:mockito-core:3.2.0"
+    testCompile "org.mockito:mockito-junit-jupiter:3.2.0"
     testCompile "net.bytebuddy:byte-buddy:1.10.6" //for some reason it is needed but not included in mockito-core
+    testCompile "org.junit.jupiter:junit-jupiter-api:${versions.junit.jupiter}"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:${versions.junit.jupiter}"
+    testCompile "org.junit.jupiter:junit-jupiter-params:${versions.junit.jupiter}"
 }
 
 jar {
@@ -32,4 +36,8 @@ jar {
 bootJar {
     baseName = 'service'
     version = ''
+}
+
+test {
+    useJUnitPlatform()
 }
