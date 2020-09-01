@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webflux-template-test
+spec:
+  finalizers:
+    - kubernetes
+status:
+  phase: Active
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota
+  namespace: webflux-template-test
+spec:
+  hard:
+    pods: "10"
+    limits.memory: 2Gi
+    requests.cpu: "2"
+    requests.memory: 2Gi
+    requests.storage: "0"
+    resourcequotas: "1"
