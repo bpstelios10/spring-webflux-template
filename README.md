@@ -43,3 +43,6 @@ For local tests use minikube: `minikube start -p webflux --memory 8000 --alsolog
 In helm, first we need to create the namespaces etc. `helm create helm/infrastructure`
 For the namespaces to be created we need to install the service in k8s: `helm install infrastructure helm/infrastructure`
 And every time a change is applied, we need to upgrade the `version` in Chart.yaml and run: `helm upgrade infrastructure helm/infrastructure`
+
+### App deployment
+Simply created a service for the app with `helm create helm/spring-boot-webflux`
