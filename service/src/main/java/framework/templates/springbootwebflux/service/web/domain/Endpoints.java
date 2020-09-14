@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum Endpoints {
     PRIVATE_STATUS("/private/status"),
     QUOTE_RANDOM("/trolltrump/quote/random"),
-    QUOTE_SEARCH("/trolltrump/quote/search");
+    QUOTE_SEARCH("/trolltrump/quote/search"),
+    MISSING_ENDPOINT("/nothing-to-see-here");
 
     private final String path;
 

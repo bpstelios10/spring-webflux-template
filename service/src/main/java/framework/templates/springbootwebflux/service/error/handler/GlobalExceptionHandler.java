@@ -9,10 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebExceptionHandler;
 import reactor.core.publisher.Flux;
@@ -37,6 +39,13 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable throwable) {
+        if (throwable instanceof ResponseStatusException) {
+            ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
+            return sendResponse(exchange, responseStatusException.getStatus(), new HttpHeaders(), new byte[]{})
+                    .doFinally(t -> log.warn("Returning Status Code {} with reason: {}",
+                            responseStatusException.getStatus(), responseStatusException.getReason()));
+        }
+
         HttpError responseError;
         if (throwable instanceof WebApplicationException) {
             responseError = HttpError.getHttpError((WebApplicationException) throwable);
@@ -45,7 +54,7 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
         }
 
         return sendResponse(exchange, responseError)
-                .doFinally((t) ->
+                .doFinally(t ->
                         log.error("Returning Status Code: {}, Response Body: {}, Request Path: {} Caused by: ",
                                 responseError.getStatusCode(),
                                 new String(toJson(responseError)),
