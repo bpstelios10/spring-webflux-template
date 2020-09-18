@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+  mocks:
+    build: service-mocks
+    ports:
+      - "9090:9090"
+    environment:
+      - DEPLOYMENT_ENVIRONMENT=local
 
   service:
     build: service

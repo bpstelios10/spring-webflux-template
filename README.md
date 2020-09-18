@@ -5,16 +5,17 @@
 ### Using Gradle tasks
 Users can start the application locally, by using the gradle task:
 ```bash
+./gradlew service-mocks:run
 ./gradlew service:bootRun
 ```
-check if server is up, by using the URL `localhost:8080/private/status`
+check if servers are up, by using the URLs: `curl localhost:9090/__admin/mappings` and `localhost:8080/private/status`
 
 ### Using docker compose
 Users can start the application locally, by using the docker-compose:
 ```groovy
 docker-compose up
 ```
-check if server is up, by using the URL `localhost:8080/private/status`
+check if servers are up, by using the URLs: `curl localhost:9090/__admin/mappings` and `localhost:8080/private/status`
 
 and shut down the application, by using docker-compose again:
 ```groovy
@@ -41,3 +42,4 @@ And every time a change is applied, we need to upgrade the `version` in Chart.ya
 
 ### App deployment
 Simply created a service for the app with `helm create helm/spring-boot-webflux`
+Apply changes by using upgrade commend ` helm upgrade spring-boot-webflux helm/spring-boot-webflux`
