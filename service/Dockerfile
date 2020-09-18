@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:11
 WORKDIR /
 
 ADD build/libs/service.jar /app/service.jar
