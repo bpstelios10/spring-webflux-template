@@ -1,0 +1,49 @@
+import com.bmuschko.gradle.docker.DockerRemoteApiPlugin
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
+import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
+import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:6.6.1'
+    }
+}
+
+apply plugin: DockerRemoteApiPlugin
+
+project.ext {
+    imageName = 'spring-boot-webflux-template'
+    dockerUsername = 'xxxx'
+    dockerPassword = 'xxxx'
+    dockerEmail = 'xxxx'
+}
+
+docker {
+    registryCredentials {
+        url = 'docker.io'
+        username = System.getenv('DOCKER_USERNAME') ?: project.ext.dockerUsername
+        password = System.getenv('DOCKER_PASSWORD') ?: project.ext.dockerPassword
+        email = System.getenv('DOCKER_EMAIL') ?: project.ext.dockerEmail
+    }
+}
+task buildImage(type: DockerBuildImage) {
+    inputDir = file(projectDir)
+    images.add("bpstelios10/$project.ext.imageName:$project.version")
+}
+task pushImage(type: DockerPushImage) {
+    dependsOn buildImage
+    images.set(buildImage.images)
+}
+task removeImage(type: DockerRemoveImage) {
+    dependsOn pushImage
+    force = true
+    targetImageId buildImage.getImageId()
+}
+task pullImage(type: DockerPullImage) {
+    dependsOn removeImage
+    image = "bpstelios10/$project.ext.imageName:$project.version"
+}

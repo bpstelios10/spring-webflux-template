@@ -42,4 +42,8 @@ And every time a change is applied, we need to upgrade the `version` in Chart.ya
 
 ### App deployment
 Simply created a service for the app with `helm create helm/spring-boot-webflux`
-Apply changes by using upgrade commend ` helm upgrade spring-boot-webflux helm/spring-boot-webflux`
+Apply changes by using gradle tasks: 
+```bash
+  ./gradlew service:deployToDev
+  ./gradlew service:deployToInt
+```

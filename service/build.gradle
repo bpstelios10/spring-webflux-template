@@ -1,17 +1,9 @@
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
-import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
-import com.bmuschko.gradle.docker.tasks.image.DockerRemoveImage
-
 buildscript {
     repositories {
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
-        mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:6.1.1'
+        classpath 'com.bmuschko:gradle-docker-plugin:6.6.1'
     }
 }
 
@@ -19,13 +11,14 @@ plugins {
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
 }
+project.version = project.properties.getOrDefault('testVersion', "0.3.0")
+apply from: "repo-tasks.gradle"
+apply from: "helm-tasks.gradle"
 
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/snapshot' }
 }
-
-apply plugin: 'com.bmuschko.docker-remote-api'
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}")
@@ -49,14 +42,6 @@ dependencies {
     testCompile "org.junit.jupiter:junit-jupiter-params:${versions.junit.jupiter}"
 }
 
-project.ext {
-    imageName = 'spring-boot-webflux-template'
-    dockerUsername = 'xxxx'
-    dockerPassword = 'xxxx'
-    dockerEmail = 'xxxx'
-}
-project.version = project.properties.getOrDefault('testVersion', "0.3.0")
-
 jar {
     enabled = true
 }
@@ -68,30 +53,4 @@ bootJar {
 
 test {
     useJUnitPlatform()
-}
-
-docker {
-    registryCredentials {
-        url = 'docker.io'
-        username = System.getenv('DOCKER_USERNAME') ?: project.ext.dockerUsername
-        password = System.getenv('DOCKER_PASSWORD') ?: project.ext.dockerPassword
-        email = System.getenv('DOCKER_EMAIL') ?: project.ext.dockerEmail
-    }
-}
-task buildImage(type: DockerBuildImage) {
-    inputDir = file(projectDir)
-    images.add("bpstelios10/$project.ext.imageName:$project.version")
-}
-task pushImage(type: DockerPushImage) {
-    dependsOn buildImage
-    images.set(buildImage.images)
-}
-task removeImage(type: DockerRemoveImage) {
-    dependsOn pushImage
-    force = true
-    targetImageId buildImage.getImageId()
-}
-task pullImage(type: DockerPullImage) {
-    dependsOn removeImage
-    image = "bpstelios10/$project.ext.imageName:$project.version"
 }
