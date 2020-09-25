@@ -23,7 +23,7 @@ public class SearchQuoteHandler extends QuoteHandler implements HandlerFunction<
     public Mono<ServerResponse> handle(ServerRequest request) {
         MediaType responseMediaType = getResponseMediaType(request);
         QuoteResponse searchQuote = QuoteResponse.of("Temp quote");
-        ResponseCommand responseCommand = getResponseCommand(responseMediaType, searchQuote);
+        ResponseCommand responseCommand = getResponseCommand(responseMediaType, Mono.just(searchQuote));
 
         return responseCommand.execute();
     }

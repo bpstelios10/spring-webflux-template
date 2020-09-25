@@ -2,10 +2,13 @@ package framework.templates.springbootwebflux.service.web.response.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import framework.templates.springbootwebflux.service.web.domain.QuoteResponse;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.reactive.function.server.EntityResponse;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.stream.Stream;
@@ -14,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
+@ExtendWith(MockitoExtension.class)
 class JsonResponseCommandTest {
     private JsonResponseCommand jsonResponseCommand;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -30,7 +34,7 @@ class JsonResponseCommandTest {
     @ParameterizedTest
     @MethodSource("quoteValues")
     void execute_succeeds(String quote, String responseBody) {
-        jsonResponseCommand = new JsonResponseCommand(QuoteResponse.of(quote), objectMapper);
+        jsonResponseCommand = new JsonResponseCommand(Mono.just(QuoteResponse.of(quote)), objectMapper);
 
         StepVerifier.create(jsonResponseCommand.execute())
                 .assertNext(serverResponse -> {

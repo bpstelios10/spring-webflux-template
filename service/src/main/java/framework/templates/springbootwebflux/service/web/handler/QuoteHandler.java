@@ -7,6 +7,7 @@ import framework.templates.springbootwebflux.service.web.response.command.Respon
 import framework.templates.springbootwebflux.service.web.response.command.TextResponseCommand;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.ServerRequest;
+import reactor.core.publisher.Mono;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +34,7 @@ public class QuoteHandler {
                 getFirstValidAcceptHeader(allowedAcceptTypes, requestAcceptHeaders);
     }
 
-    ResponseCommand getResponseCommand(MediaType responseMediaType, QuoteResponse quote) {
+    ResponseCommand getResponseCommand(MediaType responseMediaType, Mono<QuoteResponse> quote) {
         ResponseCommand responseCommand;
         if (responseMediaType.equals(MediaType.APPLICATION_JSON)) {
             responseCommand = new JsonResponseCommand(quote, objectMapper);

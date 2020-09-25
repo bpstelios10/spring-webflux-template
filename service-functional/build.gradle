@@ -6,6 +6,11 @@ repositories {
 
 dependencies {
     compile project(":service") //for this to work in spring boot, we need to enable jar in service module
+    compile(project(":service-mocks")) {
+        exclude group: "javax.servlet", module: "javax.servlet-api"
+    }
+    compile project(":service").sourceSets.main.output
+    compile project(":service-mocks").sourceSets.main.output
 
     compile group: 'io.cucumber', name: 'cucumber-jvm', version: '4.2.6'
     compile group: 'io.cucumber', name: 'cucumber-spring', version: '4.2.6'
@@ -16,6 +21,7 @@ dependencies {
     compile 'org.apache.commons:commons-collections4:4.1'
     // Fixes running tests in IntelliJ - don't set as runtime dependency, breaks remote functional tests
     compile "org.springframework:spring-tx:${versions.spring}"
+    compile("com.github.tomakehurst:wiremock-jre8:2.23.2")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
     testCompile(

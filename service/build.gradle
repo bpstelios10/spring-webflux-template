@@ -28,7 +28,7 @@ repositories {
 apply plugin: 'com.bmuschko.docker-remote-api'
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}"
+    compile("org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}")
     compile("org.springframework.boot:spring-boot-starter-actuator:${versions.springBoot}") {
         exclude group: 'io.micrometer', module: 'micrometer-core'
     }
@@ -37,6 +37,7 @@ dependencies {
     compile 'com.google.guava:guava:27.1-jre'
     compile 'io.prometheus:simpleclient_hotspot:0.6.0'
     compile 'org.apache.commons:commons-lang3:3.9'
+    compile 'org.json:json:20200518'
 
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'

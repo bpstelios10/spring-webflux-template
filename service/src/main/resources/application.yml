@@ -7,3 +7,20 @@ management:
         exclude: metrics
       path-mapping:
         prometheus: metrics
+
+service:
+  webclient:
+    connectTimeoutMs: 200
+    connectionRequestTimeoutMs: 100
+    readTimeoutMs: 500
+    poolSize: 1500
+    totalRequestTimeout: 1000
+    idleTimeout: ${DEFAULT_CONNECTION_IDLE_TIMEOUT:}
+    maxConnectionLifeTime: ${DEFAULT_CONNECTION_MAX_LIFETIME:}
+
+  quote-random:
+    scheme: http
+    host: ${QUOTE_RANDOM_URL:localhost}
+    port: ${QUOTE_RANDOM_PORT:9090}
+    path: ${QUOTE_RANDOM_PATH:/random/quote}
+#    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/xfinity/stats/ping}

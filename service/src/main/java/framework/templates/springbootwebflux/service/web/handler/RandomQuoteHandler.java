@@ -1,6 +1,7 @@
 package framework.templates.springbootwebflux.service.web.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import framework.templates.springbootwebflux.service.clients.rest.QuoteRandomDownstreamService;
 import framework.templates.springbootwebflux.service.web.domain.QuoteResponse;
 import framework.templates.springbootwebflux.service.web.response.command.ResponseCommand;
 import org.springframework.http.MediaType;
@@ -15,14 +16,18 @@ import static framework.templates.springbootwebflux.service.web.domain.ServiceHe
 @Component
 public class RandomQuoteHandler extends QuoteHandler implements HandlerFunction<ServerResponse> {
 
-    public RandomQuoteHandler(ObjectMapper objectMapper) {
+    private final QuoteRandomDownstreamService quoteRandomDownstreamService;
+
+    public RandomQuoteHandler(ObjectMapper objectMapper, QuoteRandomDownstreamService quoteRandomDownstreamService) {
         super(objectMapper, RANDOM_QUOTE_ALLOWED_ACCEPT_TYPES);
+        this.quoteRandomDownstreamService = quoteRandomDownstreamService;
     }
 
     @Override
     public Mono<ServerResponse> handle(ServerRequest request) {
         MediaType responseMediaType = getResponseMediaType(request);
-        QuoteResponse randomQuote = QuoteResponse.of("Temp quote");
+        Mono<QuoteResponse> randomQuote = quoteRandomDownstreamService.getRandomQuote()
+                .map(QuoteResponse::of);
         ResponseCommand responseCommand = getResponseCommand(responseMediaType, randomQuote);
 
         return responseCommand.execute();

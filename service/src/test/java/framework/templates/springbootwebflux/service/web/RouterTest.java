@@ -1,26 +1,35 @@
 package framework.templates.springbootwebflux.service.web;
 
+import framework.templates.springbootwebflux.service.clients.rest.QuoteRandomDownstreamService;
+import framework.templates.springbootwebflux.service.clients.rest.QuoteRandomProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 
 import java.util.stream.Stream;
 
 import static org.springframework.http.MediaType.*;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RouterTest {
 
+    @MockBean
+    QuoteRandomDownstreamService quoteRandomDownstreamService;
+    @MockBean
+    QuoteRandomProperties quoteRandomProperties;
     @Autowired
     private WebTestClient webTestClient;
 
@@ -35,6 +44,8 @@ public class RouterTest {
 
     @Test
     void routeRandomQuote_succeeds_whenNoAcceptHeaderProvided() {
+        Mockito.when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(Mono.just("Temp quote"));
+
         webTestClient
                 .get().uri("/trolltrump/quote/random")
                 .exchange()
@@ -46,6 +57,8 @@ public class RouterTest {
     @ParameterizedTest
     @MethodSource("validMediaTypeSource")
     void routeRandomQuote_succeeds_whenValidAcceptHeaderProvided(MediaType[] mediaTypes, MediaType responseMediaType, String responseBody) {
+        Mockito.when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(Mono.just("Temp quote"));
+
         webTestClient
                 .get().uri("/trolltrump/quote/random")
                 .accept(mediaTypes)

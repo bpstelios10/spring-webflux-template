@@ -3,3 +3,8 @@ service:
   host: localhost
   port: 8080
   contextPath: /
+
+wiremock:
+  host: localhost
+  port: 9090
+  context-path: /
