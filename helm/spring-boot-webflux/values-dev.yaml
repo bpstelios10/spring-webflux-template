@@ -1,4 +1,4 @@
-namespace: webflux-template-dev
+deployEnv: dev
 
 service:
   replicasCount: 1

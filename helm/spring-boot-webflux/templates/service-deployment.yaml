@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spring-boot-webflux
-  namespace: {{ .Values.namespace }}
+#  namespace: {{ .Values.namespace }}
   labels:
     app: spring-boot-webflux
 spec:
@@ -20,7 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-webflux
-  namespace: {{ .Values.namespace }}
+#  namespace: {{ .Values.namespace }}
   labels:
     app: spring-boot-webflux
 spec:
@@ -47,22 +47,26 @@ spec:
           requests:
             memory: "512Mi"
             cpu: 0
-#        readinessProbe:
-#          httpGet:
-#            path: /private/status
-#            port: 8080
-#          initialDelaySeconds: 15
-#          timeoutSeconds: 1
-#        livenessProbe:
-#          httpGet:
-#            path: /private/status
-#            port: 8080
-#          initialDelaySeconds: 30
-#          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /private/status
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            path: /private/status
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
         ports:
         - containerPort: 8080
           name: http
           protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.deployEnv }}-config
+            optional: true
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
