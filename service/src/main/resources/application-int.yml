@@ -1,0 +1,26 @@
+management:
+  endpoints:
+    web:
+      base-path: /private
+      exposure:
+        include: prometheus
+        exclude: metrics
+      path-mapping:
+        prometheus: metrics
+
+service:
+  webclient:
+    connectTimeoutMs: 200
+    connectionRequestTimeoutMs: 100
+    readTimeoutMs: 500
+    poolSize: 1500
+    totalRequestTimeout: 1000
+    idleTimeout: ${DEFAULT_CONNECTION_IDLE_TIMEOUT:}
+    maxConnectionLifeTime: ${DEFAULT_CONNECTION_MAX_LIFETIME:}
+
+  quote-random:
+    scheme: ${QUOTE_RANDOM_SCHEME:http}
+    host: ${QUOTE_RANDOM_URL:tronalddump.io}
+    port: ${QUOTE_RANDOM_PORT:80}
+    path: ${QUOTE_RANDOM_PATH:/random/quote}
+#    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/xfinity/stats/ping}

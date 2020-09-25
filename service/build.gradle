@@ -55,7 +55,7 @@ project.ext {
     dockerPassword = 'xxxx'
     dockerEmail = 'xxxx'
 }
-project.version = project.properties.getOrDefault('testVersion', "0.2.0")
+project.version = project.properties.getOrDefault('testVersion', "0.3.0")
 
 jar {
     enabled = true

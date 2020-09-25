@@ -1,4 +1,4 @@
-namespace: webflux-template-dev
+namespace: webflux-template-int
 
 service:
   replicasCount: 1
