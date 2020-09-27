@@ -1,0 +1,6 @@
+deployEnv: test
+
+service:
+  replicasCount: 1
+  image:
+    repository: bpstelios10/webflux-mocks:0.1.0

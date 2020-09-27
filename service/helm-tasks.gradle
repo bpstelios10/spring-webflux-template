@@ -1,12 +1,18 @@
 task deployToDev(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --namespace webflux-template-dev -f helm/spring-boot-webflux/values-dev.yaml ' +
+    args "-c", 'helm upgrade --install --namespace webflux-template-dev -f helm/spring-boot-webflux/values-dev.yaml ' +
             'spring-boot-webflux helm/spring-boot-webflux'
 }
 task deployToInt(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --namespace webflux-template-int -f helm/spring-boot-webflux/values-int.yaml ' +
+    args "-c", 'helm upgrade --install --namespace webflux-template-int -f helm/spring-boot-webflux/values-int.yaml ' +
+            'spring-boot-webflux helm/spring-boot-webflux'
+}
+task deployToTest(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'helm upgrade --install --namespace webflux-template-test -f helm/spring-boot-webflux/values-test.yaml ' +
             'spring-boot-webflux helm/spring-boot-webflux'
 }

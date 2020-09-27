@@ -1,10 +1,21 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:6.6.1'
+    }
+}
+
 plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0' apply true
 }
 
 mainClassName = "com.github.tomakehurst.wiremock.standalone.WireMockServerRunner"
-
+project.version = project.properties.getOrDefault('testVersion', "0.1.0")
+apply from: "repo-tasks.gradle"
+apply from: "helm-tasks.gradle"
 repositories {
     mavenCentral()
 }

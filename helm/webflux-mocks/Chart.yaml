@@ -1,0 +1,7 @@
+apiVersion: v2
+name: spring-boot-webflux
+description: Helm chart for the mock deployments
+
+type: application
+version: 0.3.0
+appVersion: 0.1.0
