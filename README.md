@@ -36,7 +36,7 @@ For k8s deployments, helm is being used.
 For local tests use minikube: `minikube start -p webflux --memory 8000 --alsologtostderr --vm-driver=virtualbox`
 
 ### K8s Infrastructure
-In helm, first we need to create the namespaces etc. `helm create helm/infrastructure`
+In helm, first we need to create the namespaces etc.
 For the namespaces to be created we need to install the service in k8s: `helm install infrastructure helm/infrastructure`
 And every time a change is applied, we need to upgrade the `version` in Chart.yaml and run: `helm upgrade infrastructure helm/infrastructure`
 
@@ -47,3 +47,4 @@ Create and upgrade mocks and service by using gradle tasks (not all modules are 
   ./gradlew {module}:deployToInt
   ./gradlew {module}:deployToTest
 ```
+(The version in chart.yaml and values-*.yaml need to be updated)

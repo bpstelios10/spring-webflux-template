@@ -23,4 +23,4 @@ service:
     host: ${QUOTE_RANDOM_URL:tronalddump.io}
     port: ${QUOTE_RANDOM_PORT:80}
     path: ${QUOTE_RANDOM_PATH:/random/quote}
-#    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/xfinity/stats/ping}
+#    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/}

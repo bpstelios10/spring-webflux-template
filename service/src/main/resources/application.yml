@@ -23,4 +23,4 @@ service:
     host: ${QUOTE_RANDOM_URL:localhost}
     port: ${QUOTE_RANDOM_PORT:9090}
     path: ${QUOTE_RANDOM_PATH:/random/quote}
-#    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/xfinity/stats/ping}
+#    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/}

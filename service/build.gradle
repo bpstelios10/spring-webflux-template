@@ -1,17 +1,19 @@
 buildscript {
     repositories {
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/libs-milestone' }
         gradlePluginPortal()
     }
     dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE'
         classpath 'com.bmuschko:gradle-docker-plugin:6.6.1'
     }
 }
 
-plugins {
-    id 'org.springframework.boot'
-    id 'io.spring.dependency-management'
-}
-project.version = project.properties.getOrDefault('testVersion', "0.3.0")
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+project.version = project.properties.getOrDefault('testVersion', "0.4.0")
 apply from: "repo-tasks.gradle"
 apply from: "helm-tasks.gradle"
 
@@ -25,7 +27,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator:${versions.springBoot}") {
         exclude group: 'io.micrometer', module: 'micrometer-core'
     }
-    compile 'io.micrometer:micrometer-registry-prometheus:1.0.7'
+    compile("org.springframework.boot:spring-boot-starter-validation:${versions.springBoot}")
+    compile 'io.micrometer:micrometer-registry-prometheus:1.6.0'
     compile 'com.fasterxml.jackson:jackson-bom:2.9.8'
     compile 'com.google.guava:guava:27.1-jre'
     compile 'io.prometheus:simpleclient_hotspot:0.6.0'

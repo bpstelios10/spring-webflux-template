@@ -3,4 +3,4 @@ deployEnv: dev
 service:
   replicasCount: 1
   image:
-    repository: bpstelios10/spring-boot-webflux-template:0.3.0
+    repository: bpstelios10/spring-boot-webflux-template:0.4.0
