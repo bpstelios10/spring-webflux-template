@@ -1,12 +1,16 @@
 task deployToDev(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --install --namespace webflux-template-dev -f helm/webflux-mocks/values-dev.yaml ' +
-            'webflux-mocks helm/webflux-mocks'
+    args "-c", 'helm upgrade --install helm-deployment-library helm/helm-deployment-library ; ' +
+            'helm dependency update helm/webflux-mocks ; ' +
+            'helm upgrade --install --kube-context webflux --namespace webflux-template-dev ' +
+            '-f helm/webflux-mocks/values-dev.yaml webflux-mocks helm/webflux-mocks'
 }
 task deployToTest(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --install --namespace webflux-template-test -f helm/webflux-mocks/values-test.yaml ' +
-            'webflux-mocks helm/webflux-mocks'
+    args "-c", 'helm upgrade --install helm-deployment-library helm/helm-deployment-library ; ' +
+            'helm dependency update helm/webflux-mocks ; ' +
+            'helm upgrade --install --kube-context webflux --namespace webflux-template-test ' +
+            '-f helm/webflux-mocks/values-test.yaml webflux-mocks helm/webflux-mocks'
 }

@@ -1,7 +1,12 @@
 apiVersion: v2
-name: spring-boot-webflux
+name: webflux-mocks
 description: Helm chart for the mock deployments
 
 type: application
-version: 0.3.0
+version: 0.6.0
 appVersion: 0.1.0
+
+dependencies:
+  - name: helm-deployment-library
+    version: 0.1.0
+    repository: file://../helm-deployment-library

@@ -1,6 +1,27 @@
-deployEnv: dev
+configMapRef:
+  deployEnv: dev
 
 service:
-  replicasCount: 1
-  image:
-    repository: bpstelios10/spring-boot-webflux-template:0.4.0
+  name: spring-boot-webflux
+  port: 8080
+  portName: client
+
+replicasCount: 1
+image:
+  repository: bpstelios10/spring-boot-webflux-template:0.4.0
+limitsMemory: 512Mi
+requestsMemory: 512Mi
+requestsCpu: 0
+readinessProbe:
+  path: /private/status
+  port: 8080
+  initialDelaySeconds: 25
+  timeoutSeconds: 1
+livenessProbe:
+  path: /private/status
+  port: 8080
+  initialDelaySeconds: 15
+  timeoutSeconds: 1
+containerPort: 8080
+portName: http
+portProtocol: TCP

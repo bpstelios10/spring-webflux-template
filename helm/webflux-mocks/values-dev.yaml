@@ -1,6 +1,27 @@
-deployEnv: dev
+configMapRef:
+  deployEnv: dev
 
 service:
-  replicasCount: 1
-  image:
-    repository: bpstelios10/webflux-mocks:0.1.0
+  name: webflux-mocks
+  port: 9090
+  portName: client
+
+replicasCount: 1
+image:
+  repository: bpstelios10/webflux-mocks:0.1.0
+limitsMemory: 512Mi
+requestsMemory: 512Mi
+requestsCpu: 0
+readinessProbe:
+  path: /__admin
+  port: http
+  initialDelaySeconds: 15
+  timeoutSeconds: 2
+livenessProbe:
+  path: /__admin
+  port: http
+  initialDelaySeconds: 15
+  timeoutSeconds: 2
+containerPort: 9090
+portName: http
+portProtocol: TCP

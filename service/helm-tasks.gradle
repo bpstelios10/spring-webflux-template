@@ -1,18 +1,39 @@
 task deployToDev(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --install --namespace webflux-template-dev -f helm/spring-boot-webflux/values-dev.yaml ' +
-            'spring-boot-webflux helm/spring-boot-webflux'
+    args "-c", 'helm upgrade --install helm-deployment-library helm/helm-deployment-library ; ' +
+            'helm dependency update helm/spring-boot-webflux ; ' +
+            'helm upgrade --install --kube-context webflux --namespace webflux-template-dev ' +
+            '-f helm/spring-boot-webflux/values-dev.yaml spring-boot-webflux helm/spring-boot-webflux'
 }
 task deployToInt(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --install --namespace webflux-template-int -f helm/spring-boot-webflux/values-int.yaml ' +
-            'spring-boot-webflux helm/spring-boot-webflux'
+    args "-c", 'helm upgrade --install helm-deployment-library helm/helm-deployment-library ; ' +
+            'helm dependency update helm/spring-boot-webflux ; ' +
+            'helm upgrade --install --kube-context webflux --namespace webflux-template-int ' +
+            '-f helm/spring-boot-webflux/values-int.yaml spring-boot-webflux helm/spring-boot-webflux'
 }
 task deployToTest(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --install --namespace webflux-template-test -f helm/spring-boot-webflux/values-test.yaml ' +
-            'spring-boot-webflux helm/spring-boot-webflux'
+    args "-c", 'helm upgrade --install helm-deployment-library helm/helm-deployment-library ; ' +
+            'helm dependency update helm/spring-boot-webflux ; ' +
+            'helm upgrade --install --kube-context webflux --namespace webflux-template-test ' +
+            '-f helm/spring-boot-webflux/values-test.yaml spring-boot-webflux helm/spring-boot-webflux'
+}
+task rollbackDev(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'helm rollback --kube-context webflux --namespace webflux-template-dev spring-boot-webflux'
+}
+task rollbackInt(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'helm rollback --kube-context webflux --namespace webflux-template-int spring-boot-webflux'
+}
+task rollbackTest(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'helm rollback --kube-context webflux --namespace webflux-template-test spring-boot-webflux'
 }
