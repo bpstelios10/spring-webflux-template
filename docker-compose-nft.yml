@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mocks:
+    build: service-mocks
+    ports:
+      - "9090:9090"
+    environment:
+      - DEPLOYMENT_ENVIRONMENT=local
+
+  service:
+    build: service
+    ports:
+      - "8080:8080"
+    environment:
+      - QUOTE_RANDOM_URL=mocks
+
+  nft:
+    build:
+      context: service-nft
+      dockerfile: Dockerfile
+    environment:
+      SIMULATION: "framework.templates.springbootwebflux.nft.simulations.ServiceSimulation"
+      GATLING_JAVA_OPTS: "-DtargetEnvironment=docker-compose -DtestDuration=400"

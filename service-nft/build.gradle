@@ -1,0 +1,57 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.1.0' apply true
+}
+
+apply plugin: 'scala'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    simulation = project.properties.getOrDefault("simulation",
+            "framework.templates.springbootwebflux.nft.simulations.ServiceSimulation")
+    testDuration = project.properties.getOrDefault('testDuration', "60") as int
+    targetEnvironment = project.properties.getOrDefault("targetEnvironment", "local")
+    testType = project.properties.getOrDefault("testType", "defaultSimulation")
+    testTimeout = testDuration + 1800
+}
+
+dependencies {
+    compile 'io.gatling.highcharts:gatling-charts-highcharts:3.0.3'
+    compile "commons-codec:commons-codec:1.13"
+}
+
+project.version = '0.1.0'
+
+shadowJar {
+    archiveFileName = 'service-nft.jar'
+}
+
+jar.enabled = false
+jar.dependsOn 'shadowJar'
+
+task gatlingRun(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'io.gatling.app.Gatling'
+
+    jvmArgs("-DtestDuration=${testDuration}",
+            "-DtargetEnvironment=${targetEnvironment}",
+            "-DtestType=${testType}",
+            '-Dlogger=console-json',
+            '-XX:+UseParallelGC',
+            '-XX:MaxGCPauseMillis=30',
+            '-XX:G1HeapRegionSize=2m',
+            '-XX:InitiatingHeapOccupancyPercent=50',
+            '-XX:+ParallelRefProcEnabled',
+            '-XX:+PerfDisableSharedMem',
+            '-XX:+AggressiveOpts',
+            '-XX:+OptimizeStringConcat',
+            '-XX:+HeapDumpOnOutOfMemoryError',
+            '-Djava.net.preferIPv4Stack=true',
+            '-Djava.net.preferIPv6Addresses=false'
+    )
+
+    args(['-bf', 'build/classes/scala/main', '-rf', 'build/results', '-s', "${simulation}"])
+}
+gatlingRun.dependsOn 'build'

@@ -48,3 +48,19 @@ Create and upgrade mocks and service by using gradle tasks (not all modules are 
   ./gradlew {module}:deployToTest
 ```
 (The version in chart.yaml and values-*.yaml need to be updated)
+
+## Non functional tests with Gatling
+For executing nfts, the application and its dependencies should be up and running as well
+
+### Run gatling using gradle command
+```
+./gradlew service-nft:gatlingRun -PtestDuration=300
+```
+with testDuration being the total execution time in seconds
+
+### Run gatling using dockerfile
+For this, docker-compose-nft is being used so gatling can reach the app from inside the container
+```
+./gradlew clean build
+docker-compose -f docker-compose-nft.yml up --build
+```
