@@ -1,0 +1,12 @@
+apiVersion: v2
+name: webflux-nft
+description: Helm chart for the nft job
+
+type: application
+version: 0.2.0
+appVersion: 0.1.0
+
+dependencies:
+  - name: helm-deployment-library
+    version: 0.1.0
+    repository: file://../helm-deployment-library
