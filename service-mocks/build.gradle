@@ -13,7 +13,7 @@ plugins {
 }
 
 mainClassName = "com.github.tomakehurst.wiremock.standalone.WireMockServerRunner"
-project.version = project.properties.getOrDefault('testVersion', "0.1.0")
+project.version = project.properties.getOrDefault('testVersion', "0.2.0")
 apply from: "repo-tasks.gradle"
 apply from: "helm-tasks.gradle"
 repositories {
@@ -37,12 +37,13 @@ jar.dependsOn 'shadowJar'
 run {
     args = [
             '--port=9090',
-            '--local-response-templating=com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer',
+            '--global-response-templating',
             '--container-threads=200',
             '--jetty-acceptor-threads=50',
             '--async-response-enabled',
             '--async-response-threads=200',
-            '--max-request-journal-entries=10000',
+//            '--max-request-journal-entries=10000',
+            '--no-request-journal', //enable this for nft executions and swap with previous line if dev debug is needed
             '--root-dir=build/resources/main'
     ]
 }

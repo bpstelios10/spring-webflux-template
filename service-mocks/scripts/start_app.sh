@@ -28,4 +28,4 @@ WIREMOCK_OPTS="$WIREMOCK_OPTS --no-request-journal --root-dir /data/mappings"
 
 echo "Starting Wiremock"
 
-exec java -cp service-mocks.jar com.github.tomakehurst.wiremock.standalone.WireMockServerRunner $WIREMOCK_OPTS
+exec java $JAVA_OPTIONS $GC_OPTIONS -cp service-mocks.jar com.github.tomakehurst.wiremock.standalone.WireMockServerRunner $WIREMOCK_OPTS
