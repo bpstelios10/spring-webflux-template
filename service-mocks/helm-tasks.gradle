@@ -14,3 +14,13 @@ task deployToTest(type: Exec) {
             'helm upgrade --install --kube-context webflux --namespace webflux-template-test ' +
             '-f helm/webflux-mocks/values-test.yaml webflux-mocks helm/webflux-mocks'
 }
+task scaleDownDev(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'kubectl --context webflux -n webflux-template-dev scale deploy webflux-mocks --replicas=0'
+}
+task scaleDownTest(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'kubectl --context webflux -n webflux-template-test scale deploy webflux-mocks --replicas=0'
+}

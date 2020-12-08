@@ -37,3 +37,18 @@ task rollbackTest(type: Exec) {
     executable "bash"
     args "-c", 'helm rollback --kube-context webflux --namespace webflux-template-test spring-boot-webflux'
 }
+task scaleDownDev(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'kubectl --context webflux -n webflux-template-dev scale deploy spring-boot-webflux --replicas=0'
+}
+task scaleDownInt(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'kubectl --context webflux -n webflux-template-int scale deploy spring-boot-webflux --replicas=0'
+}
+task scaleDownTest(type: Exec) {
+    workingDir "$rootDir"
+    executable "bash"
+    args "-c", 'kubectl --context webflux -n webflux-template-test scale deploy spring-boot-webflux --replicas=0'
+}
