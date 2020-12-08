@@ -8,7 +8,7 @@ service:
 
 replicasCount: 1
 image:
-  repository: bpstelios10/spring-boot-webflux-template:0.4.0
+  repository: bpstelios10/spring-boot-webflux-template:0.6.0
 limitsMemory: 512Mi
 requestsMemory: 512Mi
 requestsCpu: 0
@@ -25,3 +25,8 @@ livenessProbe:
 containerPort: 8080
 portName: http
 portProtocol: TCP
+env:
+  - name: "EXTRA_JAVA_OPTIONS"
+    value: "-Xms256m -Xmx256m"
+  - name: "TEST_VALUE_2"
+    value: "2"

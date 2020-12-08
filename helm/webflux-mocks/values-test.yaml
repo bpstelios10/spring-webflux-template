@@ -8,7 +8,7 @@ service:
 
 replicasCount: 1
 image:
-  repository: bpstelios10/webflux-mocks:0.1.0
+  repository: bpstelios10/webflux-mocks:0.2.0
 limitsMemory: 512Mi
 requestsMemory: 512Mi
 requestsCpu: 0
@@ -25,3 +25,8 @@ livenessProbe:
 containerPort: 9090
 portName: http
 portProtocol: TCP
+env:
+  - name: "EXTRA_JAVA_OPTIONS"
+    value: "-Xms256m -Xmx256m"
+  - name: "TEST_VALUE_1"
+    value: "1"

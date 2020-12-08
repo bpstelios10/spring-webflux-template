@@ -13,7 +13,7 @@ buildscript {
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-project.version = project.properties.getOrDefault('testVersion', "0.4.0")
+project.version = project.properties.getOrDefault('testVersion', "0.6.0")
 apply from: "repo-tasks.gradle"
 apply from: "helm-tasks.gradle"
 

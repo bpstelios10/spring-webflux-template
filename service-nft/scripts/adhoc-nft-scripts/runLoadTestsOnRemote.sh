@@ -29,12 +29,12 @@ cleanup() {
 #trap cleanup EXIT
 cleanup
 
-if [ "$USE_LOCAL_REPO" = "--useLocalRepo" ]; then
+if [ "$1" = "--useLocalRepo" ]; then
   echo "----------------- deploying app, mocks from Local START ----------------------------------"
   ${GRADLE} clean build -x test
 #  take care of version setup in chart files etc
-  ${GRADLE} :service:pushImage :service:deployToTest
   ${GRADLE} :service-mocks:pushImage :service-mocks:deployToTest
+  ${GRADLE} :service:pushImage :service:deployToTest
 
   echo "-- sleeping for 30 secs"
   sleep 30
