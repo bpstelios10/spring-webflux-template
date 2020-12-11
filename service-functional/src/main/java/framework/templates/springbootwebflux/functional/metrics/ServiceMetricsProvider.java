@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Component
 @Scope("cucumber-glue")

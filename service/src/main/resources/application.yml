@@ -15,8 +15,6 @@ service:
     readTimeoutMs: 500
     poolSize: 1500
     totalRequestTimeout: 1000
-    idleTimeout: ${DEFAULT_CONNECTION_IDLE_TIMEOUT:}
-    maxConnectionLifeTime: ${DEFAULT_CONNECTION_MAX_LIFETIME:}
 
   quote-random:
     scheme: http

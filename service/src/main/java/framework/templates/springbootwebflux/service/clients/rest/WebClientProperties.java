@@ -9,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.time.Duration;
 
 @Data
 @Builder
@@ -31,6 +30,4 @@ public class WebClientProperties {
     @Positive
     private Integer poolSize;
     private Integer totalRequestTimeout;
-    private Duration idleTimeout;
-    private Duration maxConnectionLifeTime;
 }

@@ -4,7 +4,7 @@ import cucumber.api.java8.En;
 import framework.templates.springbootwebflux.functional.client.ServiceClient;
 import framework.templates.springbootwebflux.functional.client.ServiceRequest;
 import framework.templates.springbootwebflux.functional.client.ServiceRequestGenerator;
-import framework.templates.springbootwebflux.service.web.domain.Endpoints;
+import framework.templates.springbootwebflux.functional.domain.ServiceEndpoints;
 
 import java.util.Collections;
 
@@ -16,7 +16,7 @@ public class RequestSteps implements En {
         ServiceRequest.ServiceRequestBuilder requestBuilder = requestGenerator.serviceRequestBuilder("CHANGE ME !!");
 
         Given("^the client intends to call (.*) endpoint$", (String endpoint) ->
-                requestBuilder.path(Endpoints.valueOf(endpoint).getPath())
+                requestBuilder.path(ServiceEndpoints.valueOf(endpoint).getPath())
         );
         Given("^request has header with name (.*) and value (.*)$", (String headerName, String headerValue) ->
                 requestBuilder.headers(Collections.singletonMap(headerName, headerValue))

@@ -14,7 +14,7 @@ public class HealthCheckHandler implements HandlerFunction<ServerResponse> {
     public Mono<ServerResponse> handle(ServerRequest request) {
         return Mono.just(OK.getReasonPhrase())
                 .flatMap(s -> ServerResponse.ok()
-                        .syncBody(s)
+                        .bodyValue(s)
                 );
     }
 }

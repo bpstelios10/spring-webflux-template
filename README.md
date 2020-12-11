@@ -34,6 +34,7 @@ Steps to push a new image are:
 ## K8s deployments
 For k8s deployments, helm is being used. 
 For local tests use minikube: `minikube start -p webflux --memory 8000 --alsologtostderr --vm-driver=virtualbox`
+PS: `minikube v1.11.0 on Darwin 10.15.7` and `Kubernetes v1.18.3 on Docker 19.03.8`
 
 ### K8s Infrastructure
 In helm, first we need to create the namespaces etc.

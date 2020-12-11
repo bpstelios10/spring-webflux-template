@@ -28,8 +28,6 @@ public class WebClientFactory {
                 ConnectionProvider.builder(poolName)
                         .maxConnections(webClientProperties.getPoolSize())
                         .pendingAcquireTimeout(Duration.ofMillis(webClientProperties.getConnectionRequestTimeoutMs()))
-                        .maxIdleTime(webClientProperties.getIdleTimeout())
-                        .maxLifeTime(webClientProperties.getMaxConnectionLifeTime())
                         .build();
 
         TcpClient tcpClient = TcpClient
