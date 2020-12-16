@@ -26,3 +26,7 @@ out/
 /.nb-gradle/
 
 .DS_Store
+
+### HELM ###
+Chart.lock
+*.tgz

@@ -42,7 +42,11 @@ For the namespaces to be created we need to install the service in k8s: `helm in
 And every time a change is applied, we need to upgrade the `version` in Chart.yaml and run: `helm upgrade infrastructure helm/infrastructure`
 
 ### App deployment
-Create and upgrade mocks and service by using gradle tasks (not all modules are relevant to every env): 
+Firstly we need to add the helm repository for the common helm charts, by executing:
+```
+helm repo add --username bpstelios10 --password 0e370e30c45e922af661d9008cfdb1071a4123c3 helm-plugin 'https://raw.githubusercontent.com/bpstelios10/helm-plugin/master/'
+```
+Then, create and upgrade mocks and service by using gradle tasks (not all modules are relevant to every env): 
 ```bash
   ./gradlew {module}:deployToDev
   ./gradlew {module}:deployToInt

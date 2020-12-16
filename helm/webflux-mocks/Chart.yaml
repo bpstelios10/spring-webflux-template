@@ -3,10 +3,10 @@ name: webflux-mocks
 description: Helm chart for the mock deployments
 
 type: application
-version: 0.7.0
+version: 0.8.0
 appVersion: 0.2.0
 
 dependencies:
   - name: helm-deployment-library
     version: 0.1.0
-    repository: file://../helm-deployment-library
+    repository: "@helm-plugin"

@@ -1,35 +1,10 @@
-import stelios.tools.helm.plugin.FileLoaderHelper
-import org.apache.commons.io.FileUtils
-
-task copyHelmPluginRequiredFiles() {
-    copyFileFromResources("helm-deployment-library/Chart.yaml", "helm-deployment-library/Chart.yaml")
-    copyFileFromResources("helm-deployment-library/templates/_service-deployment.tpl", "helm-deployment-library/templates/_service-deployment.tpl")
-    copyFileFromResources("helm-deployment-library/templates/_job.tpl", "helm-deployment-library/templates/_job.tpl")
-    copyFileFromResources("gitignore", ".gitignore")
-}
-
-def copyFileFromResources(def fileToCopy, def destination) {
-    File file = new File("$project.projectDir/helm/$destination")
-    InputStream is = FileLoaderHelper.class.getClassLoader().getResourceAsStream("$fileToCopy")
-    FileUtils.copyInputStreamToFile(is, file)
-}
-
 buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
-        maven {
-            url myMavenRepoReadUrl
-            credentials {
-                username 'myMavenRepo'
-                password myMavenRepoReadPassword
-            }
-        }
     }
 
     dependencies {
         classpath 'io.franzbecker:gradle-lombok:2.1'
-        classpath 'stelios.tools:helm-plugin:0.5.0'
-        classpath 'commons-io:commons-io:2.6'
     }
 }
 

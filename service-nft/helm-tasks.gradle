@@ -1,8 +1,7 @@
 task deployToTest(type: Exec) {
     workingDir "$rootDir"
     executable "bash"
-    args "-c", 'helm upgrade --install helm-deployment-library helm/helm-deployment-library ; ' +
-            'helm dependency update helm/webflux-nft ; ' +
+    args "-c", 'helm repo update ; helm dependency update helm/webflux-nft ; ' +
             'helm upgrade --install --kube-context webflux --namespace webflux-template-test ' +
             '-f helm/webflux-nft/values-test.yaml webflux-nft helm/webflux-nft'
 }
