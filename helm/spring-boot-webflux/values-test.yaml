@@ -9,8 +9,8 @@ service:
 replicasCount: 1
 image:
   repository: bpstelios10/spring-boot-webflux-template:0.7.0
-limitsMemory: 512Mi
-requestsMemory: 512Mi
+limitsMemory: 768Mi
+requestsMemory: 768Mi
 requestsCpu: 0
 readinessProbe:
   path: /private/status

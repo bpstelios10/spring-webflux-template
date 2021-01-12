@@ -12,18 +12,14 @@ if [ "$1" = "--useLocalRepo" ]; then
 #  take care of version setup in chart files etc
   ${GRADLE} :service-mocks:pushImage :service-mocks:deployToTest
   ${GRADLE} :service:pushImage :service:deployToTest
-
-  echo "-- sleeping for 30 secs"
-  sleep 30
-  #TODO we need to wait till the deployment is ready
   echo "----------------- deploying app, mocks from Local END ------------------------------------"
 else
   echo "----------------- deploying app, mocks, existing version from Repo START -----------"
   ${GRADLE} :service-mocks:deployToTest
   ${GRADLE} :service:deployToTest
-
-  echo "-- sleeping for 30 secs"
-  sleep 30
-  #TODO we need to wait till the deployment is ready
   echo "----------------- deploying app, mocks, existing version from Repo END -------------"
 fi
+
+echo "-- wait rollout to finish successfully"
+ROLLOUT=$(timeout 60 kubectl --context webflux -n webflux-template-test rollout status deployment/spring-boot-webflux)
+if [[ $ROLLOUT != *"successfully"* ]]; then echo "deployment timed out"; exit 1; fi

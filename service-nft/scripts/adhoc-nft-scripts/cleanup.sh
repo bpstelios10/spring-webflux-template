@@ -16,11 +16,10 @@ cleanup() {
 
   echo "----------------- scaling down app, mocks START --------------------------------"
   ${GRADLE} :service-nft:deleteFromTest
-  ${GRADLE} :service:scaleDownTest
-  ${GRADLE} :service-mocks:scaleDownTest
-  echo "-- sleeping for 10 secs"
-  sleep 10
-  #TODO we need to wait till the deployment is really scaled down
+  kubectl --context webflux -n webflux-template-test scale deploy --replicas=0 --all
+  echo "-- wait rollout to finish successfully"
+  ROLLOUT=$(timeout 10 kubectl --context webflux -n webflux-template-test rollout status deployment/spring-boot-webflux)
+  if [[ $ROLLOUT != *"successfully"* ]]; then exit 1; fi
 
   set -e
   echo "----------------- scaling down app, mocks END ----------------------------------"
