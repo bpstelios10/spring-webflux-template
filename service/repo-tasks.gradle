@@ -31,6 +31,7 @@ docker {
     }
 }
 task buildImage(type: DockerBuildImage) {
+    dependsOn(clean,build)
     inputDir = file(projectDir)
     images.add("bpstelios10/$project.ext.imageName:$project.version")
 }
@@ -47,3 +48,5 @@ task pullImage(type: DockerPullImage) {
     dependsOn removeImage
     image = "bpstelios10/$project.ext.imageName:$project.version"
 }
+
+build.shouldRunAfter 'clean'

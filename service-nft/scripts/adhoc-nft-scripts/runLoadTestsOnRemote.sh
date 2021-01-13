@@ -48,7 +48,7 @@ scaleUpComponents() {
 followJobLogs() {
   local JOB_POD=''
   local RETRIES=0
-  while [[ $JOB_POD == '' && $RETRIES < 5 ]]; do
+  while [[ $JOB_POD == '' && $RETRIES < 30 ]]; do
     local JOB_POD=$(kubectl --context webflux -n webflux-template-test get pods | grep webflux-nft | grep "Running" | awk '{print $1;}' | head -n 1);
     ((RETRIES=RETRIES+1));
     sleep 1;

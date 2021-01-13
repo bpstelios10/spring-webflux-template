@@ -50,6 +50,4 @@ task localFunctional(type: JavaExec) {
     dependsOn = ['testClasses']
 }
 
-localFunctional.mustRunAfter 'test'
-tasks.getByPath(':service-functional:test').mustRunAfter ':service:test'
-check.dependsOn "localFunctional"
+check.finalizedBy 'localFunctional'

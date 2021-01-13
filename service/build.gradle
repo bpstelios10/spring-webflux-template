@@ -57,3 +57,5 @@ bootJar {
 test {
     useJUnitPlatform()
 }
+
+check.finalizedBy(tasks.getByPath(':service-functional:check'))

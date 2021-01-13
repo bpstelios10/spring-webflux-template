@@ -6,13 +6,13 @@ backoffLimit: 0
 ttlSecondsAfterFinished: 120
 restartPolicy: Never
 image:
-  repository: bpstelios10/webflux-nft:0.1.0
+  repository: bpstelios10/webflux-nft:0.4.0
 imagePullPolicy: IfNotPresent
 limitsMemory: 512Mi
 requestsMemory: 512Mi
 requestsCpu: 0
 env:
   - name: "GATLING_JAVA_OPTS"
-    value: "-DtargetEnvironment=webflux-template-test -DtestDuration=1200 -Djava.net.preferIPv4Stack=true -Xmx256m -Xms256m"
+    value: "-DtargetEnvironment=webflux-template-test -DtestDuration=1200 -DtestType=peakLoad1h -Djava.net.preferIPv4Stack=true -Xmx256m -Xms256m"
   - name: "SIMULATION"
     value: "framework.templates.springbootwebflux.nft.simulations.ServiceSimulation"

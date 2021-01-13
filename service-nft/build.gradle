@@ -31,7 +31,7 @@ dependencies {
     compile "commons-codec:commons-codec:1.13"
 }
 
-project.version = '0.1.0'
+project.version = '0.4.0'
 apply from: "repo-tasks.gradle"
 apply from: "helm-tasks.gradle"
 
