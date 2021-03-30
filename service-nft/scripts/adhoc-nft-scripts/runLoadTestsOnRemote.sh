@@ -53,6 +53,7 @@ followJobLogs() {
     ((RETRIES=RETRIES+1));
     sleep 1;
   done
+  echo "Following logs of job-pod: [$JOB_POD]"
   kubectl --context webflux -n webflux-template-test logs -f $JOB_POD
 }
 
