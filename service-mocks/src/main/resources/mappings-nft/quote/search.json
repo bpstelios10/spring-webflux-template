@@ -1,0 +1,523 @@
+{
+  "scenarioName": "Search Quote Success",
+  "name": "Search Quote Success",
+  "request": {
+    "method": "GET",
+    "urlPath": "/search/quote",
+    "headers": {
+      "Accept": {
+        "equalTo": "application/json"
+      }
+    },
+    "queryParameters": {
+      "query": {
+        "equalTo": "women"
+      },
+      "tags": {
+        "equalTo": "Donald Trump"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "delayDistribution": {
+      "type": "lognormal",
+      "median": 1125,
+      "sigma": 0.12
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "count": 10,
+      "total": 13,
+      "_embedded": {
+        "quotes": [
+          {
+            "appeared_at": "1999-11-01T00:00:00.000Z",
+            "created_at": "2019-12-13T16:56:16.704Z",
+            "quote_id": "y3vcRU-1TcuzVb7NHMKq4g",
+            "tags": [
+              "Donald Trump"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "I think the only difference between me and other candidates is that I'm more honest and my women are more beautiful.",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:50:48.826Z",
+                  "filename": null,
+                  "quote_source_id": "a1IYoLsySD2YWBI1jKkkog",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:50:48.826Z",
+                  "url": "http://www.cbsnews.com/pictures/wild-donald-trump-quotes/28/",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/a1IYoLsySD2YWBI1jKkkog"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/y3vcRU-1TcuzVb7NHMKq4g"
+              }
+            }
+          },
+          {
+            "appeared_at": "1997-11-24T00:00:00.000Z",
+            "created_at": "2019-12-13T16:56:19.773Z",
+            "quote_id": "NBSpilsPQiCLXmCnH1GjOQ",
+            "tags": [
+              "Women"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "Women have one of the great acts of all time. The smart ones act very feminine and needy, but inside they are real killers. The person who came up with the expression 'the weaker sex' was either very naive or had to be kidding. I have seen women manipulate men with just a twitch of their eye -- or perhaps another body part.",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:50:51.911Z",
+                  "filename": null,
+                  "quote_source_id": "ORNK4SEvTyCmo_1i_erIvg",
+                  "remarks": "From his book, \"Trump: The Art of the Comeback\".",
+                  "updated_at": "2019-12-13T16:50:51.911Z",
+                  "url": "https://books.google.co.uk/books/about/Trump.html?id=_RtNngEACAAJ",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/ORNK4SEvTyCmo_1i_erIvg"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/NBSpilsPQiCLXmCnH1GjOQ"
+              }
+            }
+          },
+          {
+            "appeared_at": "2016-05-06T12:38:38.000Z",
+            "created_at": "2019-12-13T16:57:01.100Z",
+            "quote_id": "c1dIgMTURW-LllIZWSBESA",
+            "tags": [
+              "Hillary Clinton"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "Crooked Hillary has ZERO leadership ability. As Bernie Sanders says, she has bad judgement. Constantly playing the women's card - it is sad!",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:51:33.012Z",
+                  "filename": null,
+                  "quote_source_id": "pvQvbOjTR6anh-wKIVM5wA",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:51:33.012Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/728564631313190912",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/pvQvbOjTR6anh-wKIVM5wA"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/c1dIgMTURW-LllIZWSBESA"
+              }
+            }
+          },
+          {
+            "appeared_at": "2016-05-22T19:37:05.000Z",
+            "created_at": "2019-12-13T16:57:18.342Z",
+            "quote_id": "MP1thYzSRsuSod815r_3Gw",
+            "tags": [
+              "Hillary Clinton"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "How can Crooked Hillary say she cares about women when she is silent on radical Islam, which horribly oppresses women?",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:51:50.037Z",
+                  "filename": null,
+                  "quote_source_id": "nSN-2L6fQR684gGZL9aM8Q",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:51:50.037Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/734468142303305728",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/nSN-2L6fQR684gGZL9aM8Q"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/MP1thYzSRsuSod815r_3Gw"
+              }
+            }
+          },
+          {
+            "appeared_at": "2016-06-06T13:23:54.000Z",
+            "created_at": "2019-12-13T16:57:22.556Z",
+            "quote_id": "RqiFmZIoQ-qtDz4QTdGLUQ",
+            "tags": [
+              "Hillary Clinton"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "Crooked Hillary is being badly criticized (for a Wall Street paid for ad) by PolitiFact for a false ad on me on women. She is a total fraud!",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:51:53.678Z",
+                  "filename": null,
+                  "quote_source_id": "iwTToxnDTjSHNE9GSxnfug",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:51:53.678Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/739810044150190080",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/iwTToxnDTjSHNE9GSxnfug"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/RqiFmZIoQ-qtDz4QTdGLUQ"
+              }
+            }
+          },
+          {
+            "appeared_at": "2016-05-17T11:58:10.000Z",
+            "created_at": "2019-12-13T16:57:57.670Z",
+            "quote_id": "Kf8F_JzNT56531u6EHabeQ",
+            "tags": [],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "Amazing that Crooked Hillary can do a hit ad on me concerning women when her husband was the WORST abuser of woman in U.S. political history",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:52:28.724Z",
+                  "filename": null,
+                  "quote_source_id": "AGXE_rkiR_qlgj1-A_TR4g",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:52:28.724Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/732540713678819328",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/AGXE_rkiR_qlgj1-A_TR4g"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/Kf8F_JzNT56531u6EHabeQ"
+              }
+            }
+          },
+          {
+            "appeared_at": "2015-12-23T14:20:57.000Z",
+            "created_at": "2019-12-13T16:58:26.552Z",
+            "quote_id": "XD6isBqsTgGihlHvIMzx4A",
+            "tags": [
+              "Hillary Clinton"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "The Hillary Clinton staged event yesterday was pathetic. Be careful Hillary as you play the war on women or women being degraded card.",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:52:57.586Z",
+                  "filename": null,
+                  "quote_source_id": "BJFHWCyyTaq0PjiK8mNlXw",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:52:57.586Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/679668017505144833",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/BJFHWCyyTaq0PjiK8mNlXw"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/XD6isBqsTgGihlHvIMzx4A"
+              }
+            }
+          },
+          {
+            "appeared_at": "2016-05-17T11:46:22.000Z",
+            "created_at": "2019-12-13T16:59:04.854Z",
+            "quote_id": "HCWXDrKXTWO6ViLHtJZZOw",
+            "tags": [
+              "Hillary Clinton"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "Crooked Hillary Clinton put out an ad where I am misquoted on women. Can't believe she would misrepresent the facts! My hit was on China",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:53:35.426Z",
+                  "filename": null,
+                  "quote_source_id": "4-goyYkuRwq2fh0Uam_2wA",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:53:35.426Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/732537744195522560",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/4-goyYkuRwq2fh0Uam_2wA"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/HCWXDrKXTWO6ViLHtJZZOw"
+              }
+            }
+          },
+          {
+            "appeared_at": "2016-01-02T20:04:58.000Z",
+            "created_at": "2019-12-13T17:00:05.462Z",
+            "quote_id": "GrlBk_hCShqdI4aLm3P2Pg",
+            "tags": [],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "I hope Bill Clinton starts talking about women's issues so that voters can see what a hypocrite he is and how Hillary abused those women!",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:54:35.953Z",
+                  "filename": null,
+                  "quote_source_id": "PvxCntC8Q7e7-6AOKocl9w",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:54:35.953Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/683378470093746176",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/PvxCntC8Q7e7-6AOKocl9w"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/GrlBk_hCShqdI4aLm3P2Pg"
+              }
+            }
+          },
+          {
+            "appeared_at": "2015-08-22T22:19:05.000Z",
+            "created_at": "2019-12-13T17:00:10.412Z",
+            "quote_id": "IhVaCBxKR5ug_EFEFJAPeQ",
+            "tags": [
+              "Jeb Bush"
+            ],
+            "updated_at": "2019-12-13T17:26:27.045Z",
+            "value": "Jeb Bush is weak on illegal immigration, in favor of common core, bad on women's health issues and thinks the Iraq war was a good thing.",
+            "_embedded": {
+              "author": [
+                {
+                  "author_id": "wVE8Y7BoRKCBkxs1JkqAvw",
+                  "bio": null,
+                  "created_at": "2019-12-13T16:43:24.728Z",
+                  "name": "Donald Trump",
+                  "slug": "donald-trump",
+                  "updated_at": "2019-12-13T16:43:24.728Z",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/author/wVE8Y7BoRKCBkxs1JkqAvw"
+                    }
+                  }
+                }
+              ],
+              "source": [
+                {
+                  "created_at": "2019-12-13T16:54:41.646Z",
+                  "filename": null,
+                  "quote_source_id": "ttUneDkeQXGObYgQEPFmNg",
+                  "remarks": null,
+                  "updated_at": "2019-12-13T16:54:41.646Z",
+                  "url": "https://twitter.com/realDonaldTrump/status/635214634627256320",
+                  "_links": {
+                    "self": {
+                      "href": "http://www.tronalddump.io/quote-source/ttUneDkeQXGObYgQEPFmNg"
+                    }
+                  }
+                }
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "http://www.tronalddump.io/quote/IhVaCBxKR5ug_EFEFJAPeQ"
+              }
+            }
+          }
+        ]
+      },
+      "_links": {
+        "self": {
+          "href": "http://www.tronalddump.io/search/quote?query=women&page=0"
+        },
+        "first": {
+          "href": "http://www.tronalddump.io/search/quote?query=women&page=0"
+        },
+        "prev": {
+          "href": "http://www.tronalddump.io/search/quote?query=women&page=0"
+        },
+        "next": {
+          "href": "http://www.tronalddump.io/search/quote?query=women&page=1"
+        },
+        "last": {
+          "href": "http://www.tronalddump.io/search/quote?query=women&page=2"
+        }
+      }
+    }
+  }
+}

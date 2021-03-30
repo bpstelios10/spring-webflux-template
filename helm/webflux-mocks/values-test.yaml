@@ -8,9 +8,9 @@ service:
 
 replicasCount: 1
 image:
-  repository: bpstelios10/webflux-mocks:0.2.0
-limitsMemory: 512Mi
-requestsMemory: 512Mi
+  repository: bpstelios10/webflux-mocks:0.4.0
+limitsMemory: 1024Mi
+requestsMemory: 1024Mi
 requestsCpu: 0
 readinessProbe:
   path: /__admin
@@ -26,7 +26,9 @@ containerPort: 9090
 portName: http
 portProtocol: TCP
 env:
+  - name: "DEPLOYMENT_ENVIRONMENT"
+    value: "webflux-nft"
   - name: "EXTRA_JAVA_OPTIONS"
-    value: "-Xms256m -Xmx256m"
-  - name: "TEST_VALUE_1"
-    value: "1"
+    value: "-Xms512m -Xmx512m -XX:MaxGCPauseMillis=200"
+  - name: "WIREMOCK_OPTS"
+    value: "--port 9090 --container-threads=300 --jetty-acceptor-threads=60 --async-response-enabled=true --async-response-threads=50 --global-response-templating"
