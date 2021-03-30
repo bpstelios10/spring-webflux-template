@@ -37,7 +37,7 @@ Feature: Quote random endpoint, downstream tests
   Scenario: Quote random endpoint gives 500 when downstream cant connect
     Given application response metric for QUOTE_RANDOM with response status 500 gets initialised
     And downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException gets initialised
-    And quote-random is primed to return a successful response with fixed delay of 550 milliseconds
+    And quote-random is primed to return a successful response with fixed delay of 1950 milliseconds
     And the client intends to call QUOTE_RANDOM endpoint
     When the client makes the call
     Then a response with code 500 is returned

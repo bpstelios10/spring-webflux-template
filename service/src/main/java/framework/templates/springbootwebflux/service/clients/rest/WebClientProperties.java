@@ -19,15 +19,15 @@ import javax.validation.constraints.Positive;
 public class WebClientProperties {
     @NotNull
     @Positive
-    private Integer connectTimeoutMs;
+    private Integer poolSize;
     @NotNull
     @Positive
     private Integer connectionRequestTimeoutMs;
     @NotNull
     @Positive
-    private Integer readTimeoutMs;
+    private Integer connectTimeoutMs;
     @NotNull
     @Positive
-    private Integer poolSize;
+    private Integer readTimeoutMs;
     private Integer totalRequestTimeout;
 }

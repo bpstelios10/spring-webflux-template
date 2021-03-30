@@ -10,10 +10,10 @@ management:
 
 service:
   webclient:
-    connectTimeoutMs: 200
-    connectionRequestTimeoutMs: 100
-    readTimeoutMs: 500
     poolSize: 1500
+    connectionRequestTimeoutMs: 100
+    connectTimeoutMs: 200
+    readTimeoutMs: 1800
     totalRequestTimeout: 1000
 
   quote-random:
