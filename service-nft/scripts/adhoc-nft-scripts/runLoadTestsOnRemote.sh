@@ -11,7 +11,7 @@ cleanup() {
   echo "================= DEBUG =========== start ======"
   kubectl get pods --context webflux -n webflux-template-test
   kubectl get jobs --context webflux -n webflux-template-test
-  kubectl get events --sort-by='{.lastTimestamp}' --context webflux -n webflux-template-test
+  kubectl get events --sort-by='.metadata.creationTimestamp' --context webflux -n webflux-template-test
   echo "================= DEBUG =========== end ========"
 
   echo "----------------- scaling down app, mocks START --------------------------------"

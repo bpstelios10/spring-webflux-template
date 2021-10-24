@@ -3,10 +3,10 @@ name: spring-boot-webflux
 description: Helm chart for the service deployments
 
 type: application
-version: 0.11.0
+version: 0.15.0
 appVersion: 0.8.0
 
 dependencies:
   - name: helm-deployment-library
-    version: 0.1.0
+    version: 0.5.0
     repository: "@helm-plugin"

@@ -1,6 +1,8 @@
 configMapRef:
   deployEnv: test
 
+preStopDebugMemoryHook: true
+
 service:
   name: spring-boot-webflux
   port: 8080

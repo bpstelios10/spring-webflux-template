@@ -44,7 +44,7 @@ And every time a change is applied, we need to upgrade the `version` in Chart.ya
 ### App deployment
 Firstly we need to add the helm repository for the common helm charts, by executing:
 ```
-helm repo add --username bpstelios10 --password c7b0dcc870ba2691add9acd28985e843329f68cf helm-plugin 'https://raw.githubusercontent.com/bpstelios10/helm-plugin/master/'
+helm repo add --username bpstelios10 --password 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 helm-plugin 'https://raw.githubusercontent.com/bpstelios10/helm-plugin/master/'
 ```
 Then, create and upgrade mocks and service by using gradle tasks (not all modules are relevant to every env): 
 ```bash
