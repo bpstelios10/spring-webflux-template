@@ -28,6 +28,7 @@ ext {
             spring    : "5.2.6.RELEASE",
             junit     : [
                     jupiter: "5.5.2"
-            ]
+            ],
+            resilience4jVersion: "1.7.1"
     ]
 }

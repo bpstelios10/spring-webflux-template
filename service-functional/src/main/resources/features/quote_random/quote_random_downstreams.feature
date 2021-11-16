@@ -54,3 +54,28 @@ Feature: Quote random endpoint, downstream tests
     Then a response with code 200 is returned
     And application response metric for QUOTE_RANDOM with response status 200 is increased
     And downstream response metric for QUOTE_RANDOM with response status 200 is increased
+
+  @open-circuit
+  Scenario: Quote random endpoint gives 500 when downstream returns 500, with circuit breaker
+    Given downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException gets initialised
+    And quote-random is primed to return a successful response with fixed delay of 1950 milliseconds
+    And the client intends to call QUOTE_RANDOM endpoint
+    When the client makes the call
+    Then a response with code 500 is returned
+    And downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException is increased
+    Given downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException gets initialised
+    When the client makes the call
+    Then a response with code 500 is returned
+    And downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException is increased
+    Given downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException gets initialised
+    When the client makes the call
+    Then a response with code 500 is returned
+    And downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException is increased
+    Given downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException gets initialised
+    When the client makes the call
+    Then a response with code 500 is returned
+    And downstream response metric for QUOTE_RANDOM with response status ReadTimeoutException is increased
+    Given downstream response metric for QUOTE_RANDOM with response status 200 gets initialised
+    When the client makes the call
+    Then a response with code 200 is returned
+    And downstream response metric for QUOTE_RANDOM with response status 200 is increased

@@ -3,7 +3,6 @@ package framework.templates.springbootwebflux.service.clients.rest;
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Histogram;
-import io.prometheus.client.hotspot.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,21 +28,10 @@ public class DownstreamMetricService {
     public DownstreamMetricService(CollectorRegistry collectorRegistry) {
         applicationDownstreamCounter.register(collectorRegistry);
         applicationDownstreamLatencyHistogram.register(collectorRegistry);
-
-        registerJvmMetrics(collectorRegistry);
     }
 
     public void recordDownstreamApplicationResponseMetrics(String dependency, String endpointLabel, String statusCode, long nanos) {
         applicationDownstreamCounter.labels(dependency, endpointLabel, statusCode).inc();
         applicationDownstreamLatencyHistogram.labels(dependency, endpointLabel).observe(nanos / NANOSECONDS_PER_SECOND);
-    }
-
-    private void registerJvmMetrics(CollectorRegistry collectorRegistry) {
-        new StandardExports().register(collectorRegistry);
-        new MemoryPoolsExports().register(collectorRegistry);
-        new MemoryAllocationExports().register(collectorRegistry);
-        new BufferPoolsExports().register(collectorRegistry);
-        new ThreadExports().register(collectorRegistry);
-        new GarbageCollectorExports().register(collectorRegistry);
     }
 }

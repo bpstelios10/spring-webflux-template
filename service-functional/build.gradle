@@ -38,7 +38,7 @@ task localFunctional(type: JavaExec) {
     main = 'cucumber.api.cli.Main'
     classpath = project.sourceSets.test.runtimeClasspath
     args = ['--strict',
-            "--tags", "~@wip",
+            "--tags", "not @wip and not @open-circuit",
             "--plugin", "pretty",
             "--plugin", "html:build/cucumber-report",
             "--plugin", "junit:build/junit-test-report.xml",
@@ -46,8 +46,26 @@ task localFunctional(type: JavaExec) {
             "--glue", "framework.templates.springbootwebflux.functional.steps",
             "src/main/resources/features/"
     ]
-    jvmArgs = ["-XX:MaxMetaspaceSize=256m", "-Xmx1024m", "-Xms1024m", "-Xss256k", "-XX:NativeMemoryTracking=summary", "-XX:+UnlockDiagnosticVMOptions", "-XX:+AlwaysPreTouch", "-XX:+HeapDumpOnOutOfMemoryError"]
+    jvmArgs = ["-XX:MaxMetaspaceSize=128m", "-Xmx256m", "-Xms256m", "-Xss256k"]
     dependsOn = ['testClasses']
 }
 
-check.finalizedBy 'localFunctional'
+task openCircuitFunctional(type: JavaExec) {
+    group = 'Verification'
+    main = 'cucumber.api.cli.Main'
+    classpath = project.sourceSets.test.runtimeClasspath
+    args = ['--strict',
+            '--tags', '@open-circuit and not @wip',
+            "--plugin", "pretty",
+            "--plugin", "html:build/cucumber-report",
+            "--plugin", "junit:build/junit-test-report.xml",
+            "--plugin", "json:build/cucumber-report.json",
+            "--glue", "framework.templates.springbootwebflux.functional.steps",
+            "src/main/resources/features/"
+    ]
+    jvmArgs = ["-XX:MaxMetaspaceSize=128m", "-Xmx256m", "-Xms256m", "-Xss256k"]
+    dependsOn = ['testClasses']
+    mustRunAfter = [localFunctional]
+}
+
+check.dependsOn (localFunctional, openCircuitFunctional)

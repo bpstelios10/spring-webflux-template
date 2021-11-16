@@ -4,7 +4,7 @@ description: Helm chart for the service deployments
 
 type: application
 version: 0.15.0
-appVersion: 0.8.0
+appVersion: 0.10.0
 
 dependencies:
   - name: helm-deployment-library

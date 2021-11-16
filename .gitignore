@@ -1,6 +1,7 @@
 .gradle/
 build/
 out/
+*.log
 
 ### STS ###
 .apt_generated

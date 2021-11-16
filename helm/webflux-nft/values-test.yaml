@@ -13,7 +13,7 @@ requestsMemory: 768Mi
 requestsCpu: 0
 env:
   - name: "GATLING_JAVA_OPTS"
-    value: "-DtargetEnvironment=webflux-template-test -DtestDuration=1200 -DtestType=peakLoad1h -Djava.net.preferIPv4Stack=true -Xmx256m -Xms256m"
+    value: "-DtargetEnvironment=webflux-template-test -DtestDuration=600 -DtestType=defaultSimulation -Djava.net.preferIPv4Stack=true -Xmx256m -Xms256m"
   - name: "SIMULATION"
     value: "framework.templates.springbootwebflux.nft.simulations.ServiceSimulation"
 
