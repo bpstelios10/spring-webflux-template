@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum DownstreamEndpoints {
     QUOTE_RANDOM("TRONALDDUMP", "/random/quote"),
-    QUOTE_SEARCH("TRONALDDUMP", "/search/quote");
+    QUOTE_SEARCH("TRONALDDUMP", "/search/quote"),
+    YODA_SPEECH("YODASPEECH", "/translate/yoda");
 
     private final String dependency;
     private final String path;

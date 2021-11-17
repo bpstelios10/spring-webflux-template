@@ -45,5 +45,17 @@ public class MetricsSteps implements En {
             assertThat(serviceMetricsProvider.getCurrentMetricValue(metricKey).subtract(initialMetrics.get(metricKey)))
                     .isEqualTo(BigDecimal.valueOf(1.0));
         });
+
+        Then("^downstream response metric for (.*) with response status (.*) is not increased$", (String endpoint, String status) -> {
+            String metricKey = format(DOWNSTREAM_RESPONSES_METRIC_TEMPLATE,
+                    DownstreamEndpoints.valueOf(endpoint).getDependency(), DownstreamEndpoints.valueOf(endpoint).getPath(), status);
+            if (initialMetrics.get(metricKey) == null) throw new Exception("metric is not initialised");
+
+            assertThat(serviceMetricsProvider
+                    .getCurrentMetricValue(metricKey)
+                    .subtract(initialMetrics.get(metricKey))
+                    .compareTo(BigDecimal.ZERO)
+            ).isEqualTo(0);
+        });
     }
 }

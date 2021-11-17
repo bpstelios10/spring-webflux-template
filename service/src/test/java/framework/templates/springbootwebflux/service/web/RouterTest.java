@@ -1,7 +1,9 @@
 package framework.templates.springbootwebflux.service.web;
 
-import framework.templates.springbootwebflux.service.clients.rest.QuoteRandomDownstreamService;
-import framework.templates.springbootwebflux.service.clients.rest.QuoteRandomProperties;
+import framework.templates.springbootwebflux.service.clients.rest.quotes.QuoteRandomDownstreamService;
+import framework.templates.springbootwebflux.service.clients.rest.quotes.QuoteRandomProperties;
+import framework.templates.springbootwebflux.service.clients.rest.yodaspeech.YodaSpeechDownstreamService;
+import framework.templates.springbootwebflux.service.clients.rest.yodaspeech.YodaSpeechProperties;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,6 +32,10 @@ public class RouterTest {
     QuoteRandomDownstreamService quoteRandomDownstreamService;
     @MockBean
     QuoteRandomProperties quoteRandomProperties;
+    @MockBean
+    YodaSpeechDownstreamService yodaSpeechDownstreamService;
+    @MockBean
+    YodaSpeechProperties yodaSpeechProperties;
     @Autowired
     private WebTestClient webTestClient;
 
@@ -44,7 +50,9 @@ public class RouterTest {
 
     @Test
     void routeRandomQuote_succeeds_whenNoAcceptHeaderProvided() {
-        Mockito.when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(Mono.just("Temp quote"));
+        Mono<String> temp_quote = Mono.just("Temp quote");
+        Mockito.when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(temp_quote);
+        Mockito.when(yodaSpeechDownstreamService.getYodaTranslate("Temp quote")).thenReturn(temp_quote);
 
         webTestClient
                 .get().uri("/trolltrump/quote/random")
@@ -57,7 +65,9 @@ public class RouterTest {
     @ParameterizedTest
     @MethodSource("validMediaTypeSource")
     void routeRandomQuote_succeeds_whenValidAcceptHeaderProvided(MediaType[] mediaTypes, MediaType responseMediaType, String responseBody) {
-        Mockito.when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(Mono.just("Temp quote"));
+        Mono<String> temp_quote = Mono.just("Temp quote");
+        Mockito.when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(temp_quote);
+        Mockito.when(yodaSpeechDownstreamService.getYodaTranslate("Temp quote")).thenReturn(temp_quote);
 
         webTestClient
                 .get().uri("/trolltrump/quote/random")

@@ -1,7 +1,8 @@
 package framework.templates.springbootwebflux.service.web.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import framework.templates.springbootwebflux.service.clients.rest.QuoteRandomDownstreamService;
+import framework.templates.springbootwebflux.service.clients.rest.quotes.QuoteRandomDownstreamService;
+import framework.templates.springbootwebflux.service.clients.rest.yodaspeech.YodaSpeechDownstreamService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,17 +24,21 @@ class RandomQuoteHandlerTest {
     private ServerRequest serverRequest;
     @Mock
     private QuoteRandomDownstreamService quoteRandomDownstreamService;
+    @Mock
+    private YodaSpeechDownstreamService yodaSpeechDownstreamService;
     private RandomQuoteHandler randomQuoteHandler;
 
     @BeforeEach
     void setup() {
-        randomQuoteHandler = new RandomQuoteHandler(objectMapper, quoteRandomDownstreamService);
+        randomQuoteHandler = new RandomQuoteHandler(objectMapper, quoteRandomDownstreamService, yodaSpeechDownstreamService);
     }
 
     @Test
     void handle_succeeds_whenNoRequestHeaders() {
         String temp_quote = "Temp quote";
-        when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(Mono.just(temp_quote));
+        Mono<String> mono_temp_quote = Mono.just(temp_quote);
+        when(quoteRandomDownstreamService.getRandomQuote()).thenReturn(mono_temp_quote);
+        when(yodaSpeechDownstreamService.getYodaTranslate(temp_quote)).thenReturn(mono_temp_quote);
 
         StepVerifier.create(randomQuoteHandler.handle(serverRequest))
                 .assertNext(serverResponse -> {

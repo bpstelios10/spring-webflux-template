@@ -1,5 +1,7 @@
-package framework.templates.springbootwebflux.service.clients.rest;
+package framework.templates.springbootwebflux.service.clients.rest.quotes;
 
+import framework.templates.springbootwebflux.service.clients.rest.DownstreamMetricService;
+import framework.templates.springbootwebflux.service.clients.rest.WebClientFactory;
 import framework.templates.springbootwebflux.service.error.HttpDependencyException;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;

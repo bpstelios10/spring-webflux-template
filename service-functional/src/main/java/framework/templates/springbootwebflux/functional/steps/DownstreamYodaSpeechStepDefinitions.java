@@ -11,15 +11,15 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static framework.templates.springbootwebflux.functional.domain.Constants.EMPTY;
 import static framework.templates.springbootwebflux.functional.domain.Constants.NOT_PRESENT;
 
-public class DownstreamQuoteRandomStepDefinitions implements En {
-    private static final String QUOTE_RANDOM_URL = "/random/quote";
-    private static final UUID QUOTE_RANDOM_MAPPING_UUID = UUID.fromString("959a8290-6712-4697-afb9-8102f055e91a");
+public class DownstreamYodaSpeechStepDefinitions implements En {
+    private static final String YODA_TRANSLATE_URL = "/translate/yoda";
+    private static final UUID YODA_TRANSLATE_MAPPING_UUID = UUID.fromString("959a8290-6712-4697-afb9-8102f056e91a");
 
-    public DownstreamQuoteRandomStepDefinitions() {
-        Given("^quote-random is primed to return a successful response with (.*) header set to (.*)$",
+    public DownstreamYodaSpeechStepDefinitions() {
+        Given("^yoda-speech is primed to return a successful response with (.*) header set to (.*)$",
                 (String headerName, String headerValue) -> {
                     HttpHeaders headers = HttpHeaders.copyOf(
-                            getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders());
+                            getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getHeaders());
                     switch (headerValue) {
                         case (NOT_PRESENT):
                             break;
@@ -31,24 +31,24 @@ public class DownstreamQuoteRandomStepDefinitions implements En {
                             break;
                     }
 
-                    stubFor(get(urlEqualTo(QUOTE_RANDOM_URL))
+                    stubFor(post(urlEqualTo(YODA_TRANSLATE_URL))
                             .willReturn(aResponse()
-                                    .withBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody())
+                                    .withBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody())
                                     .withStatus(200)
                                     .withHeaders(headers)
                             ));
                 }
         );
-        Given("^quote-random is primed to return a successful response with invalid body$", () -> {
-                    String baseBody = getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody().replaceAll(":", " ");
+        Given("^yoda-speech is primed to return a successful response with invalid body$", () -> {
+                    String baseBody = getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody().replaceAll(":", " ");
 
-            stubFor(get(urlEqualTo(QUOTE_RANDOM_URL))
-                    .willReturn(aResponse().withBody(baseBody)
-                            .withHeaders(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders())
-                            .withStatus(200)));
+                    stubFor(post(urlEqualTo(YODA_TRANSLATE_URL))
+                            .willReturn(aResponse().withBody(baseBody)
+                                    .withHeaders(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getHeaders())
+                                    .withStatus(200)));
                 }
         );
-        Given("^quote-random is primed to return a (\\d+) response with body (.*)$",
+        Given("^yoda-speech is primed to return a (\\d+) response with body (.*)$",
                 (Integer statusCode, String errorMessage) -> {
                     ResponseDefinitionBuilder errorResponse = aResponse()
                             .withStatus(statusCode)
@@ -57,25 +57,25 @@ public class DownstreamQuoteRandomStepDefinitions implements En {
                                     "}")
                             .withHeader("Content-Type", "application/json");
 
-                    stubFor(get(QUOTE_RANDOM_URL).willReturn(errorResponse));
+                    stubFor(post(YODA_TRANSLATE_URL).willReturn(errorResponse));
                 }
         );
-        Given("^quote-random is primed to return a successful response with fixed delay of (\\d+) milliseconds$",
+        Given("^yoda-speech is primed to return a successful response with fixed delay of (\\d+) milliseconds$",
                 (Integer responseDelayMillis) ->
-                        stubFor(get(QUOTE_RANDOM_URL).willReturn(
+                        stubFor(post(YODA_TRANSLATE_URL).willReturn(
                                 aResponse()
-                                        .withBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody())
-                                        .withHeaders(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders())
+                                        .withBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody())
+                                        .withHeaders(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getHeaders())
                                         .withStatus(200)
                                         .withFixedDelay(responseDelayMillis)
                         ))
         );
-        Given("^quote-random is primed to return a successful response with dribbled delay of (\\d+) milliseconds in (\\d+) chunks$",
+        Given("^yoda-speech is primed to return a successful response with dribbled delay of (\\d+) milliseconds in (\\d+) chunks$",
                 (Integer responseDelayMillis, Integer chunks) ->
-                        stubFor(get(QUOTE_RANDOM_URL).willReturn(
+                        stubFor(post(YODA_TRANSLATE_URL).willReturn(
                                 aResponse()
-                                        .withBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody())
-                                        .withHeaders(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders())
+                                        .withBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody())
+                                        .withHeaders(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getHeaders())
                                         .withStatus(200)
                                         .withChunkedDribbleDelay(chunks, responseDelayMillis)
                         ))

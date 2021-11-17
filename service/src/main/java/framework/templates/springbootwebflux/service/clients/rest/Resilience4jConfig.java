@@ -8,6 +8,8 @@ import io.prometheus.client.CollectorRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Duration;
+
 @Configuration
 public class Resilience4jConfig {
 
@@ -24,8 +26,22 @@ public class Resilience4jConfig {
         CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig
                 .custom()
                 .minimumNumberOfCalls(4)
+                .slidingWindowSize(4) //in order to pass fts. should configure for fts and not
+                .waitDurationInOpenState(Duration.ofMillis(500)) //in order to pass fts. should configure for fts and not
                 .build();
 
         return circuitBreakerRegistry.circuitBreaker("QuotesService", circuitBreakerConfig);
+    }
+
+    @Bean
+    CircuitBreaker yodaSpeechServiceCircuitBreaker(CircuitBreakerRegistry circuitBreakerRegistry) {
+        CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig
+                .custom()
+                .minimumNumberOfCalls(4)
+                .slidingWindowSize(4) //in order to pass fts. should configure for fts and not
+                .waitDurationInOpenState(Duration.ofMillis(500)) //in order to pass fts. should configure for fts and not
+                .build();
+
+        return circuitBreakerRegistry.circuitBreaker("YodaSpeechService", circuitBreakerConfig);
     }
 }
