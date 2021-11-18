@@ -4,10 +4,15 @@
 
 docker, docker-compose, helm, bmuschko:gradle-docker-plugin
 
+
 **service**: spring-boot, spring-webflux, resilience4j (circuit-breaker)
+
 **mocks**: tomakehurst.wiremock
+
 **testing-functional**: io.cucumber, tomakehurst:wiremock-jre8
+
 **testing-performance**: gatling
+
 
 ## Start application locally
 
