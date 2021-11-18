@@ -1,24 +1,38 @@
 # spring-webflux-template
 
+## Tech Stack
+
+docker, docker-compose, helm, bmuschko:gradle-docker-plugin
+
+**service**: spring-boot, spring-webflux, resilience4j (circuit-breaker)
+**mocks**: tomakehurst.wiremock
+**testing-functional**: io.cucumber, tomakehurst:wiremock-jre8
+**testing-performance**: gatling
+
 ## Start application locally
 
 ### Using Gradle tasks
+
 Users can start the application locally, by using the gradle task:
-```bash
+
+```shell
 ./gradlew service-mocks:run
 ./gradlew service:bootRun
 ```
+
 check if servers are up, by using the URLs: `curl localhost:9090/__admin/mappings` and `localhost:8080/private/status`
 
 ### Using docker compose
 Users can start the application locally, by using the docker-compose:
-```groovy
+
+```shell
 docker-compose up
 ```
 check if servers are up, by using the URLs: `curl localhost:9090/__admin/mappings` and `localhost:8080/private/status`
 
 and shut down the application, by using docker-compose again:
-```groovy
+
+```shell
 docker-compose down
 ```
 
@@ -43,29 +57,52 @@ And every time a change is applied, we need to upgrade the `version` in Chart.ya
 
 ### App deployment
 Firstly we need to add the helm repository for the common helm charts, by executing:
-```
+
+```shell
 helm repo add helm-plugin 'https://raw.githubusercontent.com/bpstelios10/helm-plugin/master/'
 ```
-Then, create and upgrade mocks and service by using gradle tasks (not all modules are relevant to every env): 
-```bash
+Then, create and upgrade mocks and service by using gradle tasks (not all modules are relevant to every env):
+
+```shell
   ./gradlew {module}:deployToDev
   ./gradlew {module}:deployToInt
   ./gradlew {module}:deployToTest
 ```
+
 (The version in chart.yaml and values-*.yaml need to be updated)
 
 ## Non functional tests with Gatling
+
 For executing nfts, the application and its dependencies should be up and running as well
 
-### Run gatling using gradle command
-```
+### Run gatling locally using gradle command
+
+```shell
 ./gradlew service-nft:gatlingRun -PtestDuration=300
 ```
+
 with testDuration being the total execution time in seconds
 
-### Run gatling using dockerfile
+### Run gatling locally using dockerfile
+
 For this, docker-compose-nft is being used so gatling can reach the app from inside the container
-```
+
+```shell
 ./gradlew clean build
 docker-compose -f docker-compose-nft.yml up --build
+```
+
+### Run gatling on k8s using scripts
+
+There are some scripts that
+
+1) deploy dependencies
+2) start gatling-tests
+3) print to console gatling logs
+4) check outcome
+5) clean environment Example scripts:
+
+```shell
+./service-nft/scripts/adhoc-nft-scripts/runLoadTestsOnRemote.sh
+./service-nft/scripts/adhoc-nft-scripts/runLoadTestsOnRemote_CircuitBreakerOpen.sh
 ```
