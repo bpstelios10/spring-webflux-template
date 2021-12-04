@@ -23,30 +23,30 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}")
-    compile("org.springframework.boot:spring-boot-starter-actuator:${versions.springBoot}") {
+    api "org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}"
+    implementation("org.springframework.boot:spring-boot-starter-actuator:${versions.springBoot}") {
         exclude group: 'io.micrometer', module: 'micrometer-core'
     }
-    compile("org.springframework.boot:spring-boot-starter-validation:${versions.springBoot}")
-    compile "io.github.resilience4j:resilience4j-spring-boot2:${versions.resilience4jVersion}"
-    compile "io.github.resilience4j:resilience4j-reactor:${versions.resilience4jVersion}"
-    compile "io.github.resilience4j:resilience4j-prometheus:${versions.resilience4jVersion}"
-    compile "io.github.resilience4j:resilience4j-micrometer:${versions.resilience4jVersion}"
-    compile 'io.micrometer:micrometer-registry-prometheus:1.6.0'
-    compile 'com.fasterxml.jackson:jackson-bom:2.9.8'
-    compile 'com.google.guava:guava:27.1-jre'
-    compile 'io.prometheus:simpleclient_hotspot:0.6.0'
-    compile 'org.apache.commons:commons-lang3:3.9'
-    compile 'org.json:json:20200518'
+    implementation "org.springframework.boot:spring-boot-starter-validation:${versions.springBoot}"
+    implementation "io.github.resilience4j:resilience4j-spring-boot2:${versions.resilience4jVersion}"
+    implementation "io.github.resilience4j:resilience4j-reactor:${versions.resilience4jVersion}"
+    implementation "io.github.resilience4j:resilience4j-prometheus:${versions.resilience4jVersion}"
+    implementation "io.github.resilience4j:resilience4j-micrometer:${versions.resilience4jVersion}"
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.6.0'
+    implementation 'com.fasterxml.jackson:jackson-bom:2.9.8'
+    implementation 'com.google.guava:guava:27.1-jre'
+    implementation 'io.prometheus:simpleclient_hotspot:0.6.0'
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    implementation 'org.json:json:20200518'
 
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'
-    testCompile "org.mockito:mockito-core:3.2.0"
-    testCompile "org.mockito:mockito-junit-jupiter:3.2.0"
-    testCompile "net.bytebuddy:byte-buddy:1.10.6" //for some reason it is needed but not included in mockito-core
-    testCompile "org.junit.jupiter:junit-jupiter-api:${versions.junit.jupiter}"
-    testCompile "org.junit.jupiter:junit-jupiter-engine:${versions.junit.jupiter}"
-    testCompile "org.junit.jupiter:junit-jupiter-params:${versions.junit.jupiter}"
+    testImplementation "org.mockito:mockito-core:3.2.0"
+    testImplementation "org.mockito:mockito-junit-jupiter:3.2.0"
+    testImplementation "net.bytebuddy:byte-buddy:1.10.6" //for some reason it is needed but not included in mockito-core
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit.jupiter}"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:${versions.junit.jupiter}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${versions.junit.jupiter}"
 }
 
 jar {

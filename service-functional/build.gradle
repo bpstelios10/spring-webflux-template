@@ -3,29 +3,29 @@ repositories {
 }
 
 dependencies {
-    compile project(":service") //for this to work in spring boot, we need to enable jar in service module
-    compile(project(":service-mocks")) {
+    implementation project(":service") //for this to work in spring boot, we need to enable jar in service module
+    implementation(project(":service-mocks")) {
         exclude group: "javax.servlet", module: "javax.servlet-api"
     }
-    compile project(":service").sourceSets.main.output
-    compile project(":service-mocks").sourceSets.main.output
+    implementation project(":service").sourceSets.main.output
+    implementation project(":service-mocks").sourceSets.main.output
 
-    compile "io.cucumber:cucumber-jvm:4.2.6"
-    compile "io.cucumber:cucumber-spring:4.2.6"
-    compile "io.cucumber:cucumber-java8:4.2.6"
+    implementation "io.cucumber:cucumber-jvm:4.2.6"
+    implementation "io.cucumber:cucumber-spring:4.2.6"
+    implementation "io.cucumber:cucumber-java8:4.2.6"
 
-    compile "org.assertj:assertj-core:3.16.1"
-    compile "org.apache.httpcomponents:httpclient:4.5.3"
-    compile 'org.apache.commons:commons-collections4:4.1'
+    implementation "org.assertj:assertj-core:3.16.1"
+    implementation "org.apache.httpcomponents:httpclient:4.5.3"
+    implementation 'org.apache.commons:commons-collections4:4.1'
     // Fixes running tests in IntelliJ - don't set as runtime dependency, breaks remote functional tests
-    compile "org.springframework:spring-tx:${versions.spring}"
-    compile("com.github.tomakehurst:wiremock-jre8:2.23.2")
+    implementation "org.springframework:spring-tx:${versions.spring}"
+    implementation "com.github.tomakehurst:wiremock-jre8:2.23.2"
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
-    testCompile(
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.2"
+    testImplementation(
             "org.junit.jupiter:junit-jupiter-params:5.5.2",
             "org.mockito:mockito-junit-jupiter:3.0.0")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.5.2")
     test.useJUnitPlatform()
 }
 
