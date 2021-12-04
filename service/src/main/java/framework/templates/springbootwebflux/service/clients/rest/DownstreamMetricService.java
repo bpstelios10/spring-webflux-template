@@ -6,6 +6,9 @@ import io.prometheus.client.Histogram;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
+import java.time.Instant;
+
 @Component
 public class DownstreamMetricService {
 
@@ -30,8 +33,12 @@ public class DownstreamMetricService {
         applicationDownstreamLatencyHistogram.register(collectorRegistry);
     }
 
-    public void recordDownstreamApplicationResponseMetrics(String dependency, String endpointLabel, String statusCode, long nanos) {
+    public void recordDownstreamApplicationResponseMetrics(String dependency, String endpointLabel, String statusCode, Instant startTime) {
         applicationDownstreamCounter.labels(dependency, endpointLabel, statusCode).inc();
-        applicationDownstreamLatencyHistogram.labels(dependency, endpointLabel).observe(nanos / NANOSECONDS_PER_SECOND);
+        applicationDownstreamLatencyHistogram.labels(dependency, endpointLabel).observe(getNanos(startTime) / NANOSECONDS_PER_SECOND);
+    }
+
+    private long getNanos(Instant startTime) {
+        return Duration.between(startTime, Instant.now()).toNanos();
     }
 }

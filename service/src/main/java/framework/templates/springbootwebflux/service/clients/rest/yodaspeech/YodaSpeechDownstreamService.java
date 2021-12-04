@@ -15,7 +15,6 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
 import java.time.Instant;
 
 import static org.springframework.http.HttpMethod.POST;
@@ -95,7 +94,7 @@ public class YodaSpeechDownstreamService {
 
     private void recordClientResponseMetrics(Instant startTime, String statusCode) {
         downstreamMetricService.recordDownstreamApplicationResponseMetrics(
-                YODA_SPEECH_DEPENDENCY_IDENTIFIER, yodaSpeechProperties.getPath(), statusCode, getNanos(startTime));
+                YODA_SPEECH_DEPENDENCY_IDENTIFIER, yodaSpeechProperties.getPath(), statusCode, startTime);
     }
 
     private Mono<String> handleClientResponse(ClientResponse clientResponse) {
@@ -121,9 +120,5 @@ public class YodaSpeechDownstreamService {
                         }
                     });
         }
-    }
-
-    private long getNanos(Instant startTime) {
-        return Duration.between(startTime, Instant.now()).toNanos();
     }
 }

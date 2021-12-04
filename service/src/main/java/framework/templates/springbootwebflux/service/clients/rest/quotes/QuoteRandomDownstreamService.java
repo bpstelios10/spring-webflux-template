@@ -15,7 +15,6 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
 import java.time.Instant;
 
 import static org.springframework.http.HttpMethod.GET;
@@ -25,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Service
 public class QuoteRandomDownstreamService {
     public static final String QUOTES_RANDOM_POOL_NAME = "quotes-random-pool";
-    public static final String JSON_QUOTE_ATTRIBUTE_KEY = "value";
+    private static final String JSON_QUOTE_ATTRIBUTE_KEY = "value";
     private static final String QUOTES_RANDOM_DEPENDENCY_IDENTIFIER = "TRONALDDUMP";
     private final WebClient randomQuoteClient;
     private final QuoteRandomProperties quoteRandomProperties;
@@ -82,7 +81,7 @@ public class QuoteRandomDownstreamService {
 
     private void recordClientResponseMetrics(Instant startTime, String statusCode) {
         downstreamMetricService.recordDownstreamApplicationResponseMetrics(
-                QUOTES_RANDOM_DEPENDENCY_IDENTIFIER, quoteRandomProperties.getPath(), statusCode, getNanos(startTime));
+                QUOTES_RANDOM_DEPENDENCY_IDENTIFIER, quoteRandomProperties.getPath(), statusCode, startTime);
     }
 
     private Mono<String> handleClientResponse(ClientResponse clientResponse) {
@@ -105,9 +104,5 @@ public class QuoteRandomDownstreamService {
                         }
                     });
         }
-    }
-
-    private long getNanos(Instant startTime) {
-        return Duration.between(startTime, Instant.now()).toNanos();
     }
 }
