@@ -3,7 +3,7 @@ package framework.templates.springbootwebflux.functional.steps;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
-import cucumber.api.java8.En;
+import io.cucumber.java8.En;
 
 import java.util.UUID;
 
@@ -33,19 +33,19 @@ public class DownstreamQuoteRandomStepDefinitions implements En {
 
                     stubFor(get(urlEqualTo(QUOTE_RANDOM_URL))
                             .willReturn(aResponse()
-                                    .withBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody())
+                                    .withJsonBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getJsonBody())
                                     .withStatus(200)
                                     .withHeaders(headers)
                             ));
                 }
         );
         Given("^quote-random is primed to return a successful response with invalid body$", () -> {
-                    String baseBody = getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody().replaceAll(":", " ");
+                    String baseBody = getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getJsonBody().toString().replaceAll(":", " ");
 
-            stubFor(get(urlEqualTo(QUOTE_RANDOM_URL))
-                    .willReturn(aResponse().withBody(baseBody)
-                            .withHeaders(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders())
-                            .withStatus(200)));
+                    stubFor(get(urlEqualTo(QUOTE_RANDOM_URL))
+                            .willReturn(aResponse().withBody(baseBody)
+                                    .withHeaders(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders())
+                                    .withStatus(200)));
                 }
         );
         Given("^quote-random is primed to return a (\\d+) response with body (.*)$",
@@ -64,7 +64,7 @@ public class DownstreamQuoteRandomStepDefinitions implements En {
                 (Integer responseDelayMillis) ->
                         stubFor(get(QUOTE_RANDOM_URL).willReturn(
                                 aResponse()
-                                        .withBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody())
+                                        .withJsonBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getJsonBody())
                                         .withHeaders(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders())
                                         .withStatus(200)
                                         .withFixedDelay(responseDelayMillis)
@@ -74,7 +74,7 @@ public class DownstreamQuoteRandomStepDefinitions implements En {
                 (Integer responseDelayMillis, Integer chunks) ->
                         stubFor(get(QUOTE_RANDOM_URL).willReturn(
                                 aResponse()
-                                        .withBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getBody())
+                                        .withJsonBody(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getJsonBody())
                                         .withHeaders(getSingleStubMapping(QUOTE_RANDOM_MAPPING_UUID).getResponse().getHeaders())
                                         .withStatus(200)
                                         .withChunkedDribbleDelay(chunks, responseDelayMillis)

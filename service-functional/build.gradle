@@ -10,22 +10,23 @@ dependencies {
     implementation project(":service").sourceSets.main.output
     implementation project(":service-mocks").sourceSets.main.output
 
-    implementation "io.cucumber:cucumber-jvm:4.2.6"
-    implementation "io.cucumber:cucumber-spring:4.2.6"
-    implementation "io.cucumber:cucumber-java8:4.2.6"
+    implementation 'io.cucumber:cucumber-jvm:7.15.0'
+    implementation 'io.cucumber:cucumber-spring:7.15.0'
+    implementation 'io.cucumber:cucumber-java8:7.15.0'
+    implementation 'io.cucumber:cucumber-junit:7.15.0'
 
-    implementation "org.assertj:assertj-core:3.16.1"
-    implementation "org.apache.httpcomponents:httpclient:4.5.3"
-    implementation 'org.apache.commons:commons-collections4:4.1'
+    implementation 'org.assertj:assertj-core:3.24.2'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+    implementation 'org.apache.commons:commons-collections4:4.4'
     // Fixes running tests in IntelliJ - don't set as runtime dependency, breaks remote functional tests
     implementation "org.springframework:spring-tx:${versions.spring}"
-    implementation "com.github.tomakehurst:wiremock-jre8:2.23.2"
+    implementation "org.springframework.boot:spring-boot-starter-test:2.3.12.RELEASE"
+    implementation 'com.github.tomakehurst:wiremock-jre8:2.35.0'
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.2"
-    testImplementation(
-            "org.junit.jupiter:junit-jupiter-params:5.5.2",
-            "org.mockito:mockito-junit-jupiter:3.0.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.2.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
     test.useJUnitPlatform()
 }
 
@@ -35,9 +36,9 @@ jar {
 
 task localFunctional(type: JavaExec) {
     group = 'Verification'
-    main = 'cucumber.api.cli.Main'
+    mainClass = 'io.cucumber.core.cli.Main'
     classpath = project.sourceSets.test.runtimeClasspath
-    args = ['--strict',
+    args = [
             "--tags", "not @wip and not @open-circuit",
             "--plugin", "pretty",
             "--plugin", "html:build/cucumber-report",
@@ -52,9 +53,9 @@ task localFunctional(type: JavaExec) {
 
 task openCircuitFunctional(type: JavaExec) {
     group = 'Verification'
-    main = 'cucumber.api.cli.Main'
+    mainClass = 'io.cucumber.core.cli.Main'
     classpath = project.sourceSets.test.runtimeClasspath
-    args = ['--strict',
+    args = [
             '--tags', '@open-circuit and not @wip',
             "--plugin", "pretty",
             "--plugin", "html:build/cucumber-report",

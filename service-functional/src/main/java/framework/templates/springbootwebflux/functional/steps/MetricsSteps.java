@@ -1,9 +1,9 @@
 package framework.templates.springbootwebflux.functional.steps;
 
-import cucumber.api.java8.En;
 import framework.templates.springbootwebflux.functional.domain.DownstreamEndpoints;
 import framework.templates.springbootwebflux.functional.domain.ServiceEndpoints;
 import framework.templates.springbootwebflux.functional.metrics.ServiceMetricsProvider;
+import io.cucumber.java8.En;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

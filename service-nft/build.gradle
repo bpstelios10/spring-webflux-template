@@ -27,8 +27,8 @@ ext {
 }
 
 dependencies {
-    implementation 'io.gatling.highcharts:gatling-charts-highcharts:3.0.3'
-    implementation "commons-codec:commons-codec:1.13"
+    implementation 'io.gatling.highcharts:gatling-charts-highcharts:3.9.1'
+    implementation 'commons-codec:commons-codec:1.15'
 }
 
 project.version = '0.12.0'
@@ -44,7 +44,7 @@ jar.dependsOn 'shadowJar'
 
 task gatlingRun(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'io.gatling.app.Gatling'
+    mainClass = 'io.gatling.app.Gatling'
 
     jvmArgs("-DtestDuration=${testDuration}",
             "-DtargetEnvironment=${targetEnvironment}",

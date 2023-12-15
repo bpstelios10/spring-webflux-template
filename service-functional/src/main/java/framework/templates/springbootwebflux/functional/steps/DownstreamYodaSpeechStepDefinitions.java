@@ -3,7 +3,7 @@ package framework.templates.springbootwebflux.functional.steps;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.http.HttpHeader;
 import com.github.tomakehurst.wiremock.http.HttpHeaders;
-import cucumber.api.java8.En;
+import io.cucumber.java8.En;
 
 import java.util.UUID;
 
@@ -33,14 +33,14 @@ public class DownstreamYodaSpeechStepDefinitions implements En {
 
                     stubFor(post(urlEqualTo(YODA_TRANSLATE_URL))
                             .willReturn(aResponse()
-                                    .withBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody())
+                                    .withJsonBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getJsonBody())
                                     .withStatus(200)
                                     .withHeaders(headers)
                             ));
                 }
         );
         Given("^yoda-speech is primed to return a successful response with invalid body$", () -> {
-                    String baseBody = getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody().replaceAll(":", " ");
+            String baseBody = getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getJsonBody().toString().replaceAll(":", " ");
 
                     stubFor(post(urlEqualTo(YODA_TRANSLATE_URL))
                             .willReturn(aResponse().withBody(baseBody)
@@ -64,7 +64,7 @@ public class DownstreamYodaSpeechStepDefinitions implements En {
                 (Integer responseDelayMillis) ->
                         stubFor(post(YODA_TRANSLATE_URL).willReturn(
                                 aResponse()
-                                        .withBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody())
+                                        .withJsonBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getJsonBody())
                                         .withHeaders(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getHeaders())
                                         .withStatus(200)
                                         .withFixedDelay(responseDelayMillis)
@@ -74,7 +74,7 @@ public class DownstreamYodaSpeechStepDefinitions implements En {
                 (Integer responseDelayMillis, Integer chunks) ->
                         stubFor(post(YODA_TRANSLATE_URL).willReturn(
                                 aResponse()
-                                        .withBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getBody())
+                                        .withJsonBody(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getJsonBody())
                                         .withHeaders(getSingleStubMapping(YODA_TRANSLATE_MAPPING_UUID).getResponse().getHeaders())
                                         .withStatus(200)
                                         .withChunkedDribbleDelay(chunks, responseDelayMillis)

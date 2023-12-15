@@ -76,7 +76,7 @@ Then, create and upgrade mocks and service by using gradle tasks (not all module
 
 (The version in chart.yaml and values-*.yaml need to be updated)
 
-## Non functional tests with Gatling
+## Non-functional tests with Gatling
 
 For executing nfts, the application and its dependencies should be up and running as well
 
