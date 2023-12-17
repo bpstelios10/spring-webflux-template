@@ -12,4 +12,4 @@ COPY src/main/resources/mappings-nft /data/mappings-nft/mappings/
 
 CMD ["/start_app.sh"]
 
-EXPOSE 9090
+EXPOSE 8181

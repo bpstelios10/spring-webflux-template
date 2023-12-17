@@ -4,7 +4,7 @@ services:
   mocks:
     build: service-mocks
     ports:
-      - "9090:9090"
+      - "8181:8181"
     environment:
       - DEPLOYMENT_ENVIRONMENT=local
 

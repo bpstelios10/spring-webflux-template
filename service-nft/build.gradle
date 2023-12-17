@@ -3,12 +3,12 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:6.6.1'
+        classpath 'com.bmuschko:gradle-docker-plugin:9.4.0'
     }
 }
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.1.0' apply true
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 apply plugin: 'scala'
@@ -27,8 +27,8 @@ ext {
 }
 
 dependencies {
-    implementation 'io.gatling.highcharts:gatling-charts-highcharts:3.9.1'
-    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'io.gatling.highcharts:gatling-charts-highcharts:3.9.5'
+    implementation 'commons-codec:commons-codec:1.16.0'
 }
 
 project.version = '0.12.0'
@@ -55,7 +55,6 @@ task gatlingRun(type: JavaExec) {
             '-XX:InitiatingHeapOccupancyPercent=50',
             '-XX:+ParallelRefProcEnabled',
             '-XX:+PerfDisableSharedMem',
-            '-XX:+AggressiveOpts',
             '-XX:+OptimizeStringConcat',
             '-XX:+HeapDumpOnOutOfMemoryError',
             '-Djava.net.preferIPv4Stack=true',

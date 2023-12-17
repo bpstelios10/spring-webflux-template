@@ -19,7 +19,7 @@ export JAVA_OPTIONS="-XX:MaxMetaspaceSize=64m -XX:CompressedClassSpaceSize=16m -
 export GC_OPTIONS="-XX:+UseParallelGC"
 
 if [[ -z $WIREMOCK_OPTS ]]; then
-  WIREMOCK_OPTS="--port 9090 --container-threads=500 --jetty-acceptor-threads=100 --global-response-templating"
+  WIREMOCK_OPTS="--port 8181 --container-threads=500 --jetty-acceptor-threads=100 --global-response-templating"
   echo "WIREMOCK_OPTS has been overridden"
   WIREMOCK_OPTS="${WIREMOCK_OPTS}"
 fi

@@ -3,7 +3,7 @@ configMapRef:
 
 service:
   name: webflux-mocks
-  port: 9090
+  port: 8181
   portName: client
 
 replicasCount: 1
@@ -22,7 +22,7 @@ livenessProbe:
   port: http
   initialDelaySeconds: 15
   timeoutSeconds: 2
-containerPort: 9090
+containerPort: 8181
 portName: http
 portProtocol: TCP
 env:

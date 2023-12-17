@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.franzbecker:gradle-lombok:2.1'
+        classpath 'io.franzbecker:gradle-lombok:5.0.0'
     }
 }
 

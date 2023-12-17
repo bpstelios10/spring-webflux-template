@@ -4,7 +4,7 @@ JAVA_OPTIONS="-server"
 JAVA_OPTIONS="${JAVA_OPTIONS} $GATLING_JAVA_OPTS"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dlogger=console-json"
 JAVA_OPTIONS="${JAVA_OPTIONS} -XX:MaxMetaspaceSize=128m -XX:G1HeapRegionSize=2m -XX:InitiatingHeapOccupancyPercent=50 -XX:+ParallelRefProcEnabled"
-JAVA_OPTIONS="${JAVA_OPTIONS} -XX:+PerfDisableSharedMem -XX:+AggressiveOpts -XX:+OptimizeStringConcat"
+JAVA_OPTIONS="${JAVA_OPTIONS} -XX:+PerfDisableSharedMem -XX:+OptimizeStringConcat"
 JAVA_OPTIONS="${JAVA_OPTIONS} -XX:+HeapDumpOnOutOfMemoryError"
 JAVA_OPTIONS="${JAVA_OPTIONS} -XX:CompressedClassSpaceSize=32M -XX:ReservedCodeCacheSize=64m"
 

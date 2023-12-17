@@ -19,13 +19,13 @@ service:
   quote-random:
     scheme: http
     host: ${QUOTE_RANDOM_URL:localhost}
-    port: ${QUOTE_RANDOM_PORT:9090}
+    port: ${QUOTE_RANDOM_PORT:8181}
     path: ${QUOTE_RANDOM_PATH:/random/quote}
   #    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/}
 
   yoda-speech:
     scheme: http
     host: ${QUOTE_RANDOM_URL:localhost}
-    port: ${QUOTE_RANDOM_PORT:9090}
+    port: ${QUOTE_RANDOM_PORT:8181}
     path: ${QUOTE_RANDOM_PATH:/translate/yoda}
 #    readinessPath: ${QUOTE_RANDOM_READINESS_PATH:/}

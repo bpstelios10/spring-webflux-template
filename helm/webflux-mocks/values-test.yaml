@@ -3,7 +3,7 @@ configMapRef:
 
 service:
   name: webflux-mocks
-  port: 9090
+  port: 8181
   portName: client
 
 replicasCount: 2
@@ -22,7 +22,7 @@ livenessProbe:
   port: http
   initialDelaySeconds: 15
   timeoutSeconds: 2
-containerPort: 9090
+containerPort: 8181
 portName: http
 portProtocol: TCP
 env:
@@ -31,4 +31,4 @@ env:
   - name: "EXTRA_JAVA_OPTIONS"
     value: "-Xms512m -Xmx512m -XX:MaxGCPauseMillis=200"
   - name: "WIREMOCK_OPTS"
-    value: "--port 9090 --container-threads=90 --jetty-acceptor-threads=40 --async-response-enabled=true --async-response-threads=40 --global-response-templating"
+    value: "--port 8181 --container-threads=90 --jetty-acceptor-threads=40 --async-response-enabled=true --async-response-threads=40 --global-response-templating"

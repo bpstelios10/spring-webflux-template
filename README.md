@@ -25,7 +25,7 @@ Users can start the application locally, by using the gradle task:
 ./gradlew service:bootRun
 ```
 
-check if servers are up, by using the URLs: `curl localhost:9090/__admin/mappings` and `localhost:8080/private/status`
+check if servers are up, by using the URLs: `curl localhost:8181/__admin/mappings` and `localhost:8080/private/status`
 
 ### Using docker compose
 Users can start the application locally, by using the docker-compose:
@@ -33,7 +33,7 @@ Users can start the application locally, by using the docker-compose:
 ```shell
 docker-compose up
 ```
-check if servers are up, by using the URLs: `curl localhost:9090/__admin/mappings` and `localhost:8080/private/status`
+check if servers are up, by using the URLs: `curl localhost:8181/__admin/mappings` and `localhost:8080/private/status`
 
 and shut down the application, by using docker-compose again:
 
@@ -83,6 +83,7 @@ For executing nfts, the application and its dependencies should be up and runnin
 ### Run gatling locally using gradle command
 
 ```shell
+./gradlew service-nft:clean service-nft:build
 ./gradlew service-nft:gatlingRun -PtestDuration=300
 ```
 
