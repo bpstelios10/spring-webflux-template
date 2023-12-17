@@ -24,10 +24,9 @@ project.ext {
 
 docker {
     registryCredentials {
-        url = 'docker.io'
-        username = System.getenv('DOCKER_USERNAME') ?: project.ext.dockerUsername
-        password = System.getenv('DOCKER_PASSWORD') ?: project.ext.dockerPassword
-        email = System.getenv('DOCKER_EMAIL') ?: project.ext.dockerEmail
+        username.set(System.getenv('DOCKER_USERNAME') ?: project.ext.dockerUsername)
+        password.set(System.getenv('DOCKER_PASSWORD') ?: project.ext.dockerPassword)
+        email.set(System.getenv('DOCKER_EMAIL') ?: project.ext.dockerEmail)
     }
 }
 task buildImage(type: DockerBuildImage) {

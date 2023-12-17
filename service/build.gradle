@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE'
-        classpath 'com.bmuschko:gradle-docker-plugin:6.6.1'
+        classpath 'com.bmuschko:gradle-docker-plugin:9.4.0'
     }
 }
 
