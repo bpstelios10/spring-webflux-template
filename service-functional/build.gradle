@@ -30,9 +30,7 @@ dependencies {
     test.useJUnitPlatform()
 }
 
-jar {
-    enabled = true
-}
+jar.enabled = false
 
 task localFunctional(type: JavaExec) {
     group = 'Verification'

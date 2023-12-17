@@ -24,7 +24,7 @@ if [[ -z $WIREMOCK_OPTS ]]; then
   WIREMOCK_OPTS="${WIREMOCK_OPTS}"
 fi
 
-if [[ $DEPLOYMENT_ENVIRONMENT == *"-nft" || $DEPLOYMENT_ENVIRONMENT == "local" ]]; then
+if [[ $DEPLOYMENT_ENVIRONMENT == *"-nft" ]]; then
     echo "Starting mocks from /data/mappings-nft root"
     WIREMOCK_OPTS="$WIREMOCK_OPTS --no-request-journal --root-dir /data/mappings-nft"
 else

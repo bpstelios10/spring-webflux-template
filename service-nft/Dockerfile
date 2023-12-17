@@ -1,6 +1,7 @@
 FROM openjdk:11
 
 COPY scripts/runGatlingTest.sh /opt/gatling/
+RUN ["chmod", "+x", "/opt/gatling/runGatlingTest.sh"]
 COPY build/classes/scala/main/ /opt/gatling/user-files/
 COPY build/resources/main/ /opt/gatling/conf/
 COPY build/libs/service-nft.jar /opt/gatling/lib/

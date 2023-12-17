@@ -1,0 +1,40 @@
+{
+  "id": "959a8290-6712-4697-afb9-8102f066e91a",
+  "scenarioName": "Yoda Translate Success",
+  "name": "Yoda Translate Success",
+  "request": {
+    "method": "POST",
+    "urlPath": "/translate/yoda",
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "text": "Trump failed us once more"
+        }
+      }
+    ],
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      },
+      "Accept": {
+        "equalTo": "application/json"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": {
+        "total": 1
+      },
+      "contents": {
+        "translated": "Us once more,  trump failed",
+        "text": "Trump failed us once more",
+        "translation": "yoda"
+      }
+    }
+  }
+}

@@ -7,4 +7,4 @@ service:
 wiremock:
   host: localhost
   port: 9090
-  context-path: /
+  context-path:

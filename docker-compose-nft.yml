@@ -6,7 +6,7 @@ services:
     ports:
       - "9090:9090"
     environment:
-      - DEPLOYMENT_ENVIRONMENT=local
+      - DEPLOYMENT_ENVIRONMENT=service-nft
 
   service:
     build: service

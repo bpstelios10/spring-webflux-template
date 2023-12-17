@@ -32,30 +32,27 @@ dependencies {
     implementation "io.github.resilience4j:resilience4j-reactor:${versions.resilience4jVersion}"
     implementation "io.github.resilience4j:resilience4j-prometheus:${versions.resilience4jVersion}"
     implementation "io.github.resilience4j:resilience4j-micrometer:${versions.resilience4jVersion}"
-    implementation 'io.micrometer:micrometer-registry-prometheus:1.6.0'
-    implementation 'com.fasterxml.jackson:jackson-bom:2.9.8'
-    implementation 'com.google.guava:guava:27.1-jre'
-    implementation 'io.prometheus:simpleclient_hotspot:0.6.0'
-    implementation 'org.apache.commons:commons-lang3:3.9'
-    implementation 'org.json:json:20200518'
+    implementation 'io.micrometer:micrometer-registry-prometheus:1.10.5'
+    implementation 'com.fasterxml.jackson:jackson-bom:2.14.2'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'io.prometheus:simpleclient_hotspot:0.16.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.json:json:20230227'
 
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'
-    testImplementation "org.mockito:mockito-core:3.2.0"
-    testImplementation "org.mockito:mockito-junit-jupiter:3.2.0"
-    testImplementation "net.bytebuddy:byte-buddy:1.10.6" //for some reason it is needed but not included in mockito-core
+    testImplementation 'org.mockito:mockito-core:5.2.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.2.0'
+    testImplementation 'net.bytebuddy:byte-buddy:1.14.2' //for some reason it is needed but not included in mockito-core
     testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit.jupiter}"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${versions.junit.jupiter}"
     testImplementation "org.junit.jupiter:junit-jupiter-params:${versions.junit.jupiter}"
 }
 
-jar {
-    enabled = true
-}
-
+jar.enabled = false
 bootJar {
-    baseName = 'service'
-    version = ''
+    archiveBaseName = 'service'
+    archiveVersion = ''
 }
 
 test {

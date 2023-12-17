@@ -27,7 +27,7 @@ ext {
             springBoot: "2.3.4.RELEASE",
             spring    : "5.2.6.RELEASE",
             junit     : [
-                    jupiter: "5.5.2"
+                    jupiter: "5.6.2"
             ],
             resilience4jVersion: "1.7.1"
     ]

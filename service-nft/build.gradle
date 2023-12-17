@@ -38,7 +38,6 @@ apply from: "helm-tasks.gradle"
 shadowJar {
     archiveFileName = 'service-nft.jar'
 }
-
 jar.enabled = false
 jar.dependsOn 'shadowJar'
 

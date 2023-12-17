@@ -1,0 +1,40 @@
+{
+  "id": "959a8290-6712-4697-afb9-8102f056e91a",
+  "scenarioName": "Yoda Translate Success",
+  "name": "Yoda Translate Success",
+  "request": {
+    "method": "POST",
+    "urlPath": "/translate/yoda",
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "text": "Women have one of the great acts of all time. The smart ones act very feminine and needy, but inside they are real killers. The person who came up with the expression 'the weaker sex' was either very naive or had to be kidding. I have seen women manipulate men with just a twitch of their eye -- or perhaps another body part."
+        }
+      }
+    ],
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      },
+      "Accept": {
+        "equalTo": "application/json"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "success": {
+        "total": 1
+      },
+      "contents": {
+        "translated": "One of the great acts of all time,  women have.The smart ones act very feminine and needy,Real killers,  but inside they are.Up with the expression 'the weaker sex' was either very naive or had to be kidding,  the person who came.Seen women manipulate men with just a twitch of their eye -- or perhaps another body part,  I have.",
+        "text": "Women have one of the great acts of all time. The smart ones act very feminine and needy, but inside they are real killers. The person who came up with the expression 'the weaker sex' was either very naive or had to be kidding. I have seen women manipulate men with just a twitch of their eye -- or perhaps another body part.",
+        "translation": "yoda"
+      }
+    }
+  }
+}

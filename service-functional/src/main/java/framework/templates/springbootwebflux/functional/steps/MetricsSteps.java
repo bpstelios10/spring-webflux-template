@@ -13,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MetricsSteps implements En {
 
-    private static final String APPLICATION_RESPONSES_METRIC_TEMPLATE = "application_responses\\{endpointName=\"%s\",status=\"%s\",}";
-    private static final String DOWNSTREAM_RESPONSES_METRIC_TEMPLATE = "downstream_responses\\{dependency=\"%s\",endpoint=\"%s\",status=\"%s\",}";
+    private static final String APPLICATION_RESPONSES_METRIC_TEMPLATE = "application_responses_total\\{endpointName=\"%s\",status=\"%s\",}";
+    private static final String DOWNSTREAM_RESPONSES_METRIC_TEMPLATE = "downstream_responses_total\\{dependency=\"%s\",endpoint=\"%s\",status=\"%s\",}";
 
     private final HashMap<String, BigDecimal> initialMetrics = new HashMap<>();
 
