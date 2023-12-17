@@ -24,11 +24,10 @@ subprojects {
 
 ext {
     versions = [
-            springBoot: "2.3.4.RELEASE",
-            spring    : "5.2.6.RELEASE",
+            springBoot: "2.7.18",
             junit     : [
-                    jupiter: "5.6.2"
+                    jupiter: "5.8.2" //for later we need spring boot 3
             ],
-            resilience4jVersion: "1.7.1"
+            resilience4jVersion: "1.7.1" //needs java17
     ]
 }

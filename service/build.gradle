@@ -5,7 +5,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.7.18'
         classpath 'com.bmuschko:gradle-docker-plugin:9.4.0'
     }
 }
@@ -41,8 +41,8 @@ dependencies {
 
     testImplementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
     testImplementation 'io.projectreactor:reactor-test'
-    testImplementation 'org.mockito:mockito-core:5.2.0'
-    testImplementation 'org.mockito:mockito-junit-jupiter:5.2.0'
+    testImplementation 'org.mockito:mockito-core:5.8.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.8.0'
     testImplementation 'net.bytebuddy:byte-buddy:1.14.2' //for some reason it is needed but not included in mockito-core
     testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junit.jupiter}"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${versions.junit.jupiter}"

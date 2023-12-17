@@ -1,11 +1,11 @@
 package framework.templates.springbootwebflux.service.web.filter;
 
 import framework.templates.springbootwebflux.service.service.MetricService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
 import org.springframework.mock.http.server.reactive.MockServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
@@ -13,21 +13,26 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.http.HttpStatus.OK;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class MetricsFilterTest {
 
-    @InjectMocks
-    MetricsFilter metricsFilter;
     @Mock
-    MetricService metricService;
+    private MetricService metricService;
     @Mock
-    ServerWebExchange exchange;
+    private ServerWebExchange exchange;
     @Mock
-    WebFilterChain chain;
+    private WebFilterChain chain;
+    private MetricsFilter metricsFilter;
+
+    @BeforeEach
+    void setup() {
+        metricsFilter = new MetricsFilter(metricService);
+    }
 
     @Test
     public void filter_succeeds_forNotExcludedPaths() {
