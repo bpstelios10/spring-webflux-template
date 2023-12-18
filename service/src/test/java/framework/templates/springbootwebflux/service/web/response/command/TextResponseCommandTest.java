@@ -38,7 +38,7 @@ class TextResponseCommandTest {
                 .assertNext(serverResponse -> {
                     assertThat(serverResponse.statusCode()).isEqualTo(OK);
                     assertThat(serverResponse.headers().getContentType()).isEqualTo(TEXT_PLAIN);
-                    assertThat(((EntityResponse) serverResponse).entity()).isEqualTo(responseBody);
+                    assertThat(((EntityResponse<?>) serverResponse).entity()).isEqualTo(responseBody);
                 })
                 .verifyComplete();
     }

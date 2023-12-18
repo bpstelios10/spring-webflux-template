@@ -4,14 +4,12 @@ buildscript {
     }
     dependencies {
         classpath 'com.bmuschko:gradle-docker-plugin:9.4.0'
+        classpath "com.github.johnrengelman:shadow:8.1.1"
     }
 }
 
-plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
-}
-
 apply plugin: 'scala'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 repositories {
     mavenCentral()
@@ -27,6 +25,8 @@ ext {
 }
 
 dependencies {
+    implementation "org.scala-lang:scala-library:2.13.12"
+    scalaCompilerPlugins "org.typelevel:kind-projector_2.13.12:0.13.2"
     implementation 'io.gatling.highcharts:gatling-charts-highcharts:3.9.5'
     implementation 'commons-codec:commons-codec:1.16.0'
 }

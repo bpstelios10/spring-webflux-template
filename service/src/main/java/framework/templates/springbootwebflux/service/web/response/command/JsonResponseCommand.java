@@ -10,8 +10,8 @@ import reactor.core.publisher.Mono;
 
 import static framework.templates.springbootwebflux.service.web.domain.QuoteResponse.EMPTY_QUOTE_RESPONSE;
 import static java.util.Optional.ofNullable;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.util.StringUtils.hasText;
 
 public class JsonResponseCommand implements ResponseCommand {
     private final Mono<QuoteResponse> quote;
@@ -36,7 +36,7 @@ public class JsonResponseCommand implements ResponseCommand {
     private byte[] toJson(QuoteResponse quoteResponse) {
         QuoteResponse nonEmptyQuoteResponse = ofNullable(quoteResponse)
                 .map((q) -> {
-                    if (isBlank(q.getQuote())) {
+                    if (!hasText(q.getQuote())) {
                         return EMPTY_QUOTE_RESPONSE;
                     } else {
                         return q;

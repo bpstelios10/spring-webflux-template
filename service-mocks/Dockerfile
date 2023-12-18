@@ -1,6 +1,6 @@
-FROM openjdk:11
+FROM openjdk:21-jdk
 
-ENV WIREMOCK_VERSION 2.23.2
+ENV WIREMOCK_VERSION 3.3.1
 
 WORKDIR /wiremock
 

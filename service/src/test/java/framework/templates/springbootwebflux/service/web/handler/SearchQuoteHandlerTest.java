@@ -1,7 +1,6 @@
 package framework.templates.springbootwebflux.service.web.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.net.HttpHeaders;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,6 +18,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.ACCEPT;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.TEXT_PLAIN;
@@ -33,8 +33,8 @@ class SearchQuoteHandlerTest {
     private static Stream<Arguments> validAcceptMediaTypes() {
         return Stream.of(
                 Arguments.of(MockServerRequest.builder().build().headers(), APPLICATION_JSON, "{\"quote\":\"Temp quote\"}".getBytes()),
-                Arguments.of(MockServerRequest.builder().header(HttpHeaders.ACCEPT, "application/json").build().headers(), APPLICATION_JSON, "{\"quote\":\"Temp quote\"}".getBytes()),
-                Arguments.of(MockServerRequest.builder().header(HttpHeaders.ACCEPT, "text/plain").build().headers(), TEXT_PLAIN, "Temp quote")
+                Arguments.of(MockServerRequest.builder().header(ACCEPT, "application/json").build().headers(), APPLICATION_JSON, "{\"quote\":\"Temp quote\"}".getBytes()),
+                Arguments.of(MockServerRequest.builder().header(ACCEPT, "text/plain").build().headers(), TEXT_PLAIN, "Temp quote")
         );
     }
 
@@ -47,7 +47,7 @@ class SearchQuoteHandlerTest {
                 .assertNext(serverResponse -> {
                     assertThat(serverResponse.statusCode()).isEqualTo(OK);
                     assertThat(serverResponse.headers().getContentType()).isEqualTo(mediaType);
-                    assertThat(((EntityResponse) serverResponse).entity()).isEqualTo(expectedResponseBody);
+                    assertThat(((EntityResponse<?>) serverResponse).entity()).isEqualTo(expectedResponseBody);
                 })
                 .verifyComplete();
     }
@@ -58,7 +58,7 @@ class SearchQuoteHandlerTest {
                 .assertNext(serverResponse -> {
                     assertThat(serverResponse.statusCode()).isEqualTo(OK);
                     assertThat(serverResponse.headers().getContentType()).isEqualTo(APPLICATION_JSON);
-                    assertThat(((EntityResponse) serverResponse).entity()).isEqualTo("{\"quote\":\"Temp quote\"}".getBytes());
+                    assertThat(((EntityResponse<?>) serverResponse).entity()).isEqualTo("{\"quote\":\"Temp quote\"}".getBytes());
                 })
                 .verifyComplete();
     }

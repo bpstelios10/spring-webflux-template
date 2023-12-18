@@ -20,9 +20,9 @@ import org.springframework.web.server.WebExceptionHandler;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.util.StringUtils.hasText;
 
 @Slf4j
 @Order(-2)
@@ -39,8 +39,7 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable throwable) {
-        if (throwable instanceof ResponseStatusException) {
-            ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
+        if (throwable instanceof ResponseStatusException responseStatusException) {
             return sendResponse(exchange, responseStatusException.getStatus(), new HttpHeaders(), new byte[]{})
                     .doFinally(t -> log.warn("Returning Status Code {} with reason: {}",
                             responseStatusException.getStatus(), responseStatusException.getReason()));
@@ -81,6 +80,6 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
 
     @SneakyThrows
     private byte[] toJson(HttpError responseError) {
-        return isBlank(responseError.getErrorDescription()) ? new byte[]{} : objectMapper.writeValueAsBytes(responseError);
+        return !hasText(responseError.getErrorDescription()) ? new byte[]{} : objectMapper.writeValueAsBytes(responseError);
     }
 }

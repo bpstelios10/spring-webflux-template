@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM openjdk:21-rc-jdk-oracle
 
 COPY scripts/runGatlingTest.sh /opt/gatling/
 RUN ["chmod", "+x", "/opt/gatling/runGatlingTest.sh"]

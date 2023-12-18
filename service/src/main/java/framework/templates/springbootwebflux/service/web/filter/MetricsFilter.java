@@ -1,6 +1,5 @@
 package framework.templates.springbootwebflux.service.web.filter;
 
-import com.google.common.collect.ImmutableList;
 import framework.templates.springbootwebflux.service.service.MetricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,7 @@ import java.util.List;
 @Component
 public class MetricsFilter implements WebFilter {
 
-    private static final List<String> METRIC_EXCLUDED_ENDPOINTS = ImmutableList.of("favicon");
+    private static final List<String> METRIC_EXCLUDED_ENDPOINTS = List.of("favicon");
 
     private final MetricService metricService;
 

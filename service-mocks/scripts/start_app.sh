@@ -34,4 +34,4 @@ fi
 
 echo "Starting Wiremock with WIREMOCK_OPTS: [$WIREMOCK_OPTS]"
 
-exec java $JAVA_OPTIONS $GC_OPTIONS -cp service-mocks.jar com.github.tomakehurst.wiremock.standalone.WireMockServerRunner $WIREMOCK_OPTS
+exec java $JAVA_OPTIONS $GC_OPTIONS -cp service-mocks.jar wiremock.Run $WIREMOCK_OPTS
