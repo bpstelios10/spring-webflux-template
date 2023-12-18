@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
@@ -40,9 +40,9 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable throwable) {
         if (throwable instanceof ResponseStatusException responseStatusException) {
-            return sendResponse(exchange, responseStatusException.getStatus(), new HttpHeaders(), new byte[]{})
+            return sendResponse(exchange, responseStatusException.getStatusCode(), new HttpHeaders(), new byte[]{})
                     .doFinally(t -> log.warn("Returning Status Code {} with reason: {}",
-                            responseStatusException.getStatus(), responseStatusException.getReason()));
+                            responseStatusException.getStatusCode().value(), responseStatusException.getReason()));
         }
 
         HttpError responseError;
@@ -71,7 +71,7 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
         return sendResponse(exchange, responseError.getStatusCode(), responseError.getHeaders(), toJson(responseError));
     }
 
-    private Mono<Void> sendResponse(ServerWebExchange exchange, HttpStatus httpStatus, MultiValueMap<String, String> headers, byte[] body) {
+    private Mono<Void> sendResponse(ServerWebExchange exchange, HttpStatusCode httpStatus, MultiValueMap<String, String> headers, byte[] body) {
         exchange.getResponse().setStatusCode(httpStatus);
         exchange.getResponse().getHeaders().addAll(headers);
         DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(body);

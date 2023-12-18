@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -49,7 +50,7 @@ public class QuoteRandomDownstreamService {
                 .transformDeferred(CircuitBreakerOperator.of(circuitBreaker))
                 .onErrorResume(CallNotPermittedException.class, this::handleCircuitBreakerError)
                 .onErrorResume(ex -> handleClientError(startTime, ex))
-                .doOnNext(response -> recordClientResponseMetrics(startTime, String.valueOf(response.rawStatusCode())))
+                .doOnNext(response -> recordClientResponseMetrics(startTime, String.valueOf(response.statusCode().value())))
                 .flatMap(this::handleClientResponse);
     }
 
@@ -86,7 +87,7 @@ public class QuoteRandomDownstreamService {
 
     private Mono<String> handleClientResponse(ClientResponse clientResponse) {
         Mono<String> responseBodyMono = clientResponse.bodyToMono(String.class);
-        HttpStatus responseStatus = clientResponse.statusCode();
+        HttpStatusCode responseStatus = clientResponse.statusCode();
         if (responseStatus.isError()) {
             return responseBodyMono.flatMap(errorBody ->
                     Mono.error(new HttpDependencyException(QUOTES_RANDOM_DEPENDENCY_IDENTIFIER,

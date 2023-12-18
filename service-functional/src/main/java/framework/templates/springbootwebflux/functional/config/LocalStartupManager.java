@@ -6,6 +6,8 @@ import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.standalone.JsonFileMappingsSource;
 import framework.templates.springbootwebflux.service.SpringBootWebfluxApplication;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -13,9 +15,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 import static java.lang.System.exit;
 
@@ -49,7 +48,7 @@ public class LocalStartupManager {
         return new WireMockServer(WireMockConfiguration.wireMockConfig()
                 .notifier(new ConsoleNotifier(true))
                 .port(port)
-                .mappingSource(new JsonFileMappingsSource(new ClasspathFileSource("mappings")))
+                .mappingSource(new JsonFileMappingsSource(new ClasspathFileSource("mappings"), null))
         );
     }
 }

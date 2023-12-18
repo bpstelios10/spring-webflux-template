@@ -6,7 +6,7 @@ backoffLimit: 0
 ttlSecondsAfterFinished: 120
 restartPolicy: Never
 image:
-  repository: bpstelios10/webflux-nft:0.12.0
+  repository: bpstelios10/webflux-nft:0.13.0
 imagePullPolicy: IfNotPresent
 limitsMemory: 768Mi
 requestsMemory: 768Mi

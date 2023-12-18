@@ -35,7 +35,7 @@ class ServiceMetricsProviderTest {
 
     @BeforeEach
     void setup() {
-        when(requestGenerator.serviceRequestBuilder("/private/metrics")).thenReturn(serviceResponseBuilder);
+        when(requestGenerator.serviceRequestBuilder("private/metrics")).thenReturn(serviceResponseBuilder);
         serviceMetricsProvider = new ServiceMetricsProvider(serviceClient, requestGenerator);
     }
 

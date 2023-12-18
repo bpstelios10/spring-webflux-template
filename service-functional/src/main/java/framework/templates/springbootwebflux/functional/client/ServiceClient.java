@@ -2,23 +2,23 @@ package framework.templates.springbootwebflux.functional.client;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.entity.EntityBuilder;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.methods.RequestBuilder;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.Header;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.net.URIBuilder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
-import static org.apache.commons.collections4.MapUtils.emptyIfNull;
 
 @Component
 public class ServiceClient {
@@ -28,9 +28,7 @@ public class ServiceClient {
 
     public void execute(ServiceRequest serviceRequest) {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpResponse response = httpClient.execute(toHttpUriRequest(serviceRequest));
-
-            this.response = toServiceResponse(response);
+            response = httpClient.execute(toHttpUriRequest(serviceRequest), this::toServiceResponse);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,25 +43,27 @@ public class ServiceClient {
                 .setPath(serviceRequest.getPath())
                 .build();
 
-        final RequestBuilder requestBuilder = RequestBuilder
-                .create(serviceRequest.getMethod())
-                .setUri(uri)
-                .setEntity(EntityBuilder.create().setText(serviceRequest.getBody()).build());
+        HttpGet httpGet = new HttpGet(uri); // TODO handle POST too
+        getHeadersOrEmptyIfNull(serviceRequest).forEach(httpGet::addHeader);
 
-        emptyIfNull(serviceRequest.getHeaders()).forEach(requestBuilder::addHeader);
-
-        return requestBuilder.build();
+        return httpGet;
     }
 
-    private ServiceResponse toServiceResponse(HttpResponse response) throws IOException {
+    private ServiceResponse toServiceResponse(ClassicHttpResponse response) throws IOException, ParseException {
         return ServiceResponse.builder()
                 .headers(
-                        stream(response.getAllHeaders())
+                        stream(response.getHeaders())
                                 .collect(Collectors.toMap(Header::getName, Header::getValue))
                 )
                 .body(EntityUtils.toString(response.getEntity()))
-                .statusCode(response.getStatusLine().getStatusCode())
-                .statusLine(response.getStatusLine().getReasonPhrase())
+                .statusCode(response.getCode())
+                .statusLine(response.getReasonPhrase())
                 .build();
+    }
+
+    private static Map<String, String> getHeadersOrEmptyIfNull(ServiceRequest serviceRequest) {
+        Map<String, String> headers = serviceRequest.getHeaders();
+        if (headers == null) headers = Map.of();
+        return headers;
     }
 }

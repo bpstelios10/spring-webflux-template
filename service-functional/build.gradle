@@ -4,20 +4,14 @@ repositories {
 
 dependencies {
     implementation project(":service")
+    implementation project(":service-mocks")
     implementation project(":service").sourceSets.main.output
     implementation project(":service-mocks").sourceSets.main.output
 
-    implementation 'io.cucumber:cucumber-jvm:7.15.0'
     implementation 'io.cucumber:cucumber-spring:7.15.0'
     implementation 'io.cucumber:cucumber-java8:7.15.0'
-    implementation 'io.cucumber:cucumber-junit:7.15.0'
 
-    implementation 'org.assertj:assertj-core:3.24.2'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
-    implementation 'org.apache.commons:commons-collections4:4.4'
-    implementation 'com.github.tomakehurst:wiremock-jre8:2.35.0' // probably needs spring 3?
-    implementation 'ch.qos.logback:logback-classic:1.2.12' // needs spring 3
-    implementation 'net.logstash.logback:logstash-logback-encoder:7.3' // for 7.4 we need logback-classis 1.4
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.3'
     implementation "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
 
     test.useJUnitPlatform()

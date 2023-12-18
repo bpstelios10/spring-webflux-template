@@ -26,7 +26,7 @@ public class ServiceMetricsProvider {
     @Autowired
     public ServiceMetricsProvider(ServiceClient serviceClient, ServiceRequestGenerator serviceRequestGenerator) {
         this.serviceClient = serviceClient;
-        this.serviceRequestBuilder = serviceRequestGenerator.serviceRequestBuilder("/private/metrics");
+        this.serviceRequestBuilder = serviceRequestGenerator.serviceRequestBuilder("private/metrics");
     }
 
     public BigDecimal getCurrentMetricValue(String metricKey) {

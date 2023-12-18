@@ -12,7 +12,7 @@ apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 mainClassName = "wiremock.Run"
-project.version = project.properties.getOrDefault('testVersion', "0.4.0")
+project.version = project.properties.getOrDefault('testVersion', "0.5.0")
 apply from: "repo-tasks.gradle"
 apply from: "helm-tasks.gradle"
 repositories {
@@ -20,11 +20,9 @@ repositories {
 }
 
 dependencies {
-    implementation('org.wiremock:wiremock:3.3.1') {
-        exclude group: "org.slf4j"
-    }
-    implementation 'ch.qos.logback:logback-classic:1.2.12' // needs spring 3
-    implementation 'net.logstash.logback:logstash-logback-encoder:7.3' // for 7.4 we need logback-classis 1.4
+    api 'org.wiremock:wiremock:3.3.1'
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
 }
 
 shadowJar {

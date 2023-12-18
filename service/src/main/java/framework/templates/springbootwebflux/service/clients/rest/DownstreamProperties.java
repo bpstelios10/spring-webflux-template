@@ -1,11 +1,10 @@
 package framework.templates.springbootwebflux.service.clients.rest;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 @Data
 @Validated
@@ -19,6 +18,4 @@ public class DownstreamProperties {
     private Integer port;
     @NotBlank
     private String path;
-//    @NotBlank
-//    private String readinessPath;
 }
